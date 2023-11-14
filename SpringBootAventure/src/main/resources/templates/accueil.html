@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
@@ -7,16 +7,17 @@
 </head>
 
 <body>
-<div class="vh-100">
+
+<div class="min-vh-100">
     <nav th:replace="mesFragments :: fragNav"></nav>
     <main class="container">
     <h1>BRATATATA</h1>
-
     </main>
 </div>
 
-
+<footer th:replace="mesFragments :: fragFooter"></footer>
 
 </body>
-<footer th:replace="mesFragments :: fragFooter"></footer>
+
 </html>
+

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
     <title>Formulaire d'inscription</title>
 </head>
+
 <body>
+
 <nav th:replace="mesFragments :: fragNav"></nav>
+
 <h2>FORMULAIRE D'INSCRIPTION</h2>
+
 <form action="/confirmationInscription" method="post">
     <label for="titre">Titre :</label>
     <select id="titre" name="titre">
@@ -31,6 +36,9 @@
     <br>
     <button type="submit">Envoyer</button>
 </form>
+
 <footer th:replace="mesFragments :: fragFooter"></footer>
+
 </body>
+
 </html>
