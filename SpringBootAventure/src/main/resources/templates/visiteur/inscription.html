@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Formulaire d'inscription</title>
+</head>
+<body>
+<nav th:replace="mesFragments :: fragNav"></nav>
+<h2>FORMULAIRE D'INSCRIPTION</h2>
+<form action="/confirmationInscription" method="post">
+    <label for="titre">Titre :</label>
+    <select id="titre" name="titre">
+        <option value="M.">M.</option>
+        <option value="Mme">Mme</option>
+    </select>
+    <br>
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required>
+    <br>
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" required>
+    <br>
+    <label for="dateNaissance">Date de Naissance :</label>
+    <input type="date" id="dateNaissance" name="dateNaissance" required>
+    <br>
+    <label for="email">Entrer votre email:</label>
+    <input type="email" id="email" placeholder="test@example.com"  required />
+    <br>
+    <label for="pass">Mot de passe (8 caractère minimum):</label>
+    <input type="password" id="pass" name="password" minlength="8" required />
+    <br>
+    <button type="submit">Envoyer</button>
+</form>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>
