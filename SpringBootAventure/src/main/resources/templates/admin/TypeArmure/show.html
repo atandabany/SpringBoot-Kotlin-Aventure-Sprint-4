@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<div class="vh-100">
+
+    <nav th:replace="mesFragments :: fragNav"></nav>
+
+    <main class="container">
+
+        <h1 th:text="'Type d'Armure '+${typeArmure.nom}"></h1>
+
+        <ul>
+            <li th:text="'Nom : '+ ${typeArmure.nom}"></li>
+            <li th:text="'Bonus : '+${typeArmure.bonusType}"></li>
+        </ul>
+
+    </main>
+
+</div>
+
+<footer th:replace="mesFragments :: fragFooter"></footer>
+
+<script src="/js/validation.js"></script>
+
+</body>
+
+</html>

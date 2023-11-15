@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<div class="vh-100">
+
+    <nav th:replace="mesFragments :: fragNav"></nav>
+
+    <div th:replace="mesFragments :: fragFlashSuccess"></div>
+
+    <main class="container">
+
+        <h1>Gestion des Type arme</h1>
+
+        <div>
+            <a th:href="@{'/admin/typeArme/create'}" class="btn btn-success">
+                Ajouter un type arme
+            </a>
+        </div>
+
+        <table class="table table-striped">
+
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Nombre Des</th>
+                <th>Valeur De Max</th>
+                <th>Multiplicateur Critique</th>
+                <th>Activation Critique</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="uneType : ${typeArme}">
+                <td th:text="${uneType.nom}"></td>
+                <td th:text="${uneType.nombreDes}"></td>
+                <td th:text="${uneType.valeurDeMax}"></td>
+                <td th:text="${uneType.multiplicateurCritique}"></td>
+                <td th:text="${uneType.activationCritique}"></td>
+                <td class="d-flex">
+                    <a th:href="@{'/admin/qualite/'+${uneQualite.id}+'/edit'}" class="btn btn-warning">
+                        Modifier
+                    </a>
+                    <a th:href="@{'/admin/qualite/'+${uneQualite.id}}" class="btn btn-primary">
+                        Consulter
+                    </a>
+                    <div>
+                        <form th:action="@{'/admin/qualite/delete'}" method="post">
+                            <input type="hidden" name="id" th:value="${uneQualite.id}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+    </main>
+
+</div>
+
+<footer th:replace="mesFragments :: fragFooter"></footer>
+
+<script src="/js/validation.js"></script>
+
+</body>
+
+</html>

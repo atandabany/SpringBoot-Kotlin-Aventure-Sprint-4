@@ -15,7 +15,7 @@ class QualiteControlleur(val qualiteDao: QualiteDAO) {
      * Affiche la liste de toutes les qualités.
      *
      * @param model Le modèle utilisé pour transmettre les données à la vue.
-     * @return Le nom d ela vue à afficher.
+     * @return Le nom de la vue à afficher.
      */
     @GetMapping("/admin/qualite")
     fun index(model: Model): String {
