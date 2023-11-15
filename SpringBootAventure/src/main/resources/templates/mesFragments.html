@@ -38,8 +38,19 @@
         </ul>
     </div>
 </nav>
-    <footer th:fragment="fragFooter">
-        Team : ADS
-    </footer>
+<div th:fragment="fragFlashSuccess">
+    <div  class="toast-container position-fixed tom-0 end-0 p-3" >
+        <!-- Toast de Bootstrap -->
+        <div th:if="${msgSuccess != null}" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success">
+                <strong class="me-auto">Opération réussie</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" th:text="${msgSuccess}">
+            </div>
+        </div>
+    </div>
+</div>
+    <footer th:fragment="fragFooter">Team : ADS</footer>
 </body>
 </html>
