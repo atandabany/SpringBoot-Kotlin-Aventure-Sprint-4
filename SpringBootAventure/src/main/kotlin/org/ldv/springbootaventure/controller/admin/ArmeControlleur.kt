@@ -26,4 +26,5 @@ class ArmeControlleur ( val armeDao : ArmeDAO){
         return "admin/arme/index"
     }
 
+
 }

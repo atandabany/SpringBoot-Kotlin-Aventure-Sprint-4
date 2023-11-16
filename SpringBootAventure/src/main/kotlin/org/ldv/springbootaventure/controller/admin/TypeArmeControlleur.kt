@@ -47,7 +47,7 @@ class TypeArmeControlleur(val typeArmeDAO : TypeArmeDAO) {
         return "admin/TypeArme/show"
     }
     /**
-     * Affiche le formulaire de création d'une nouvelle qualité.
+     * Affiche le formulaire de création d'un nouveau Type.
      *
      * @param model Le modèle utilisé pour transmettre les données à la vue.
      * @return Le nom de la vue à afficher (le formulaire de création).

@@ -10,7 +10,8 @@ class TypeArmure constructor(
     var id: Long? = null,
     var nom: String,
     var bonusType: Int,
-    @OneToMany(mappedBy = "typeArmure", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+
+    @OneToMany(mappedBy = "typeArmure", cascade = [CascadeType.REMOVE])
      var armures: MutableList<Armure> = mutableListOf()
 ) {
 

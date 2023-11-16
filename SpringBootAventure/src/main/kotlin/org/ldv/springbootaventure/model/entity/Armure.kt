@@ -16,12 +16,10 @@ class Armure constructor(
     @ManyToOne
     @JoinColumn(name = "qualite_id")
     var qualite: Qualite? = null,
+
     @ManyToOne
     @JoinColumn(name = "type_armure_id")
      var typeArmure: TypeArmure? = null
-
-
-
 
     //Association avec TypeArmure
 ):Item(id, nom, description, cheminImage){
