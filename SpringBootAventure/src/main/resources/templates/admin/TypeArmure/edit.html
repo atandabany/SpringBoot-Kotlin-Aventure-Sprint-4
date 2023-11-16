@@ -15,13 +15,13 @@
 
         <div class="row col-10 col-sm-8 col-md-6 col-lg-4 mx-auto mt-3">
 
-            <form novalidate class="validation" th:action="@{/admin/typeArmure/update}" th:object="${typeArmure}"
+            <form novalidate class="validation" th:action="@{/admin/type-armure/update}" th:object="${typeArmure}"
                   method="post">
 
                 <h2 class="mb-4">Modification d'un Type d'Armure</h2>
 
                 <!-- Input pour l'id de type d'armure -->
-                <input readonly required type="hidden" name="id" th:field="${typArmure.id}">
+                <input readonly required type="hidden" name="id" th:field="${typeArmure.id}">
 
                 <!-- Input pour le nom du type d'armure -->
                 <div class="mb-3">

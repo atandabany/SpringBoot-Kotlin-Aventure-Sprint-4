@@ -15,11 +15,11 @@
 
     <main class="container">
 
-        <h1>Gestion des Types d'Armure</h1>
+        <h1>Gestion des Qualites</h1>
 
         <div>
-            <a th:href="@{'/admin/type-armure/create'}" class="btn btn-success">
-                Ajouter un type d'armure
+            <a th:href="@{'/admin/arme/create'}" class="btn btn-success">
+                Ajouter une qualite
             </a>
         </div>
 
@@ -29,24 +29,26 @@
             <tr>
                 <th>Nom</th>
                 <th>Bonus</th>
+                <th>Couleur</th>
                 <th>Actions</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr th:each="unTypeArmure : ${typeArmures}">
-                <td th:text="${unTypeArmure.nom}"></td>
-                <td th:text="${unTypeArmure.bonusType}"></td>
+            <tr th:each="uneQualite : ${qualites}">
+                <td th:text="${uneQualite.nom}"></td>
+                <td th:text="${uneQualite.bonusQualite}"></td>
+                <td th:text="${uneQualite.couleur}"></td>
                 <td class="d-flex">
-                    <a th:href="@{'/admin/type-armure/'+${unTypeArmure.id}+'/edit'}" class="btn btn-warning">
+                    <a th:href="@{'/admin/qualite/'+${uneQualite.id}+'/edit'}" class="btn btn-warning">
                         Modifier
                     </a>
-                    <a th:href="@{'/admin/type-armure/'+${unTypeArmure.id}}" class="btn btn-primary">
+                    <a th:href="@{'/admin/qualite/'+${uneQualite.id}}" class="btn btn-primary">
                         Consulter
                     </a>
                     <div>
-                        <form th:action="@{'/admin/type-armure/delete'}" method="post">
-                            <input type="hidden" name="id" th:value="${unTypeArmure.id}">
+                        <form th:action="@{'/admin/qualite/delete'}" method="post">
+                            <input type="hidden" name="id" th:value="${uneQualite.id}">
                             <button class="btn btn-danger">Supprimer</button>
                         </form>
                     </div>

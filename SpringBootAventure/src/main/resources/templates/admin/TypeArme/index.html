@@ -18,7 +18,7 @@
         <h1>Gestion des Type arme</h1>
 
         <div>
-            <a th:href="@{'/admin/typeArme/create'}" class="btn btn-success">
+            <a th:href="@{'/admin/type-arme/create'}" class="btn btn-success">
                 Ajouter un type arme
             </a>
         </div>
@@ -43,15 +43,15 @@
                 <td th:text="${uneType.multiplicateurCritique}"></td>
                 <td th:text="${uneType.activationCritique}"></td>
                 <td class="d-flex">
-                    <a th:href="@{'/admin/qualite/'+${uneQualite.id}+'/edit'}" class="btn btn-warning">
+                    <a th:href="@{'/admin/type-arme/'+${uneType.id}+'/edit'}" class="btn btn-warning">
                         Modifier
                     </a>
-                    <a th:href="@{'/admin/qualite/'+${uneQualite.id}}" class="btn btn-primary">
+                    <a th:href="@{'/admin/type-arme/'+${uneType.id}}" class="btn btn-primary">
                         Consulter
                     </a>
                     <div>
-                        <form th:action="@{'/admin/qualite/delete'}" method="post">
-                            <input type="hidden" name="id" th:value="${uneQualite.id}">
+                        <form th:action="@{'/admin/type-arme/delete'}" method="post">
+                            <input type="hidden" name="id" th:value="${uneType.id}">
                             <button class="btn btn-danger">Supprimer</button>
                         </form>
                     </div>

@@ -1,10 +1,6 @@
 package org.ldv.springbootaventure.model.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
 class TypeArmure constructor(
@@ -13,6 +9,9 @@ class TypeArmure constructor(
     @Column(name = "id", nullable = false)
     var id: Long? = null,
     var nom: String,
-    var bonusType: Int
+    var bonusType: Int,
+    @OneToMany(mappedBy = "typeArmure", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+     var armures: MutableList<Armure> = mutableListOf()
 ) {
+
 }

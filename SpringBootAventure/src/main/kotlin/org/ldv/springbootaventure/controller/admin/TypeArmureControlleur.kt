@@ -47,7 +47,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         model.addAttribute("typeArmure", unTypeArmure)
 
         // Retourne le nom de la vue à afficher
-        return "admin/typeArmure/show"
+        return "admin/TypeArmure/show"
     }
 
 
@@ -66,7 +66,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         model.addAttribute("nouveauTypeArmure", nouveauTypeArmure)
 
         // Retourne le nom de la vue à afficher (le formulaire de création)
-        return "admin/typeArmure/create"
+        return "admin/TypeArmure/create"
     }
 
 
@@ -84,7 +84,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         // Ajoute un message de succès pour être affiché à la vue suivante
         redirectAttributes.addFlashAttribute("msgSuccess", "Enregistrement de ${savedTypeArmure.nom} réussi")
         // Redirige vers la page d'administration des types d'armure
-        return "redirect:/admin/typeArmure"
+        return "redirect:/admin/type-armure"
     }
 
 
@@ -97,7 +97,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         model.addAttribute("typeArmure", unTypeArmure)
 
         // Retourne le nom de la vue à afficher
-        return "admin/type-armure/edit"
+        return "/admin/TypeArmure/edit"
     }
 
 
@@ -125,7 +125,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         redirectAttributes.addFlashAttribute("msgSuccess", "Modification de ${savedTypeArmure.nom} réussie")
 
         // Redirige vers la page d'administration des types d'armure
-        return "redirect:/admin/typeArmure"
+        return "redirect:/admin/type-armure"
     }
 
 
@@ -149,6 +149,6 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         redirectAttributes.addFlashAttribute("msgSuccess", "Suppression de ${typeArmure.nom} réussie")
 
         // Redirige vers la page d'administration des types d'armure
-        return "redirect:/admin/typeArmure"
+        return "redirect:/admin/type-armure"
     }
 }

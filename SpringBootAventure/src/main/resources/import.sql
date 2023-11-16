@@ -1,3 +1,4 @@
 insert into qualite (bonus_qualite, couleur, nom) values (0,'grey','commun'),(1,'#00FFFFFF','rare'),(2,'#FF69B4FF','epique'),(3,'#FFA500FF','légendaire');
-insert into type_arme (activationCritique, multiplicateurCritique, valeurDeMax, nombreDes, nom) values (3, 4, 8, 2, 'Baton'),(1, 2, 3, 4, 'Lance'),(2, 3, 4, 5, 'Hache'),(3, 4, 4, 8, 'Marteau de guerre');
-insert into type_armure (nom,bonus_type) values (0,'rambourre'),(1,'cuir'),(2,'cuirCloute'),(3,'chemiseChaine'),(4,'pectoral'),(5,'cotteDeMailles');
+insert into type_arme (activation_critique, multiplicateur_critique, valeur_de_max, nombre_des, nom) values (3, 4, 8, 2, 'Baton'),(1, 2, 3, 4, 'Lance'),(2, 3, 4, 5, 'Hache'),(3, 4, 4, 8, 'Marteau de guerre');
+insert into type_armure (bonus_type,nom) values (0,'rambourre'),(1,'cuir'),(2,'cuirCloute'),(3,'chemiseChaine'),(4,'pectoral'),(5,'cotteDeMailles');
+insert into type_accessoire (nom, bonus_type) values (0,'collierRouge','attaque'),(1,'collierBleu','defense'),(2,'#FF69B4FF','epique'),(3,'collierJaune','vitesse'),(4,'collierOrange','endurance');

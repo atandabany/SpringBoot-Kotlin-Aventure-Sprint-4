@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<div class="vh-100">
+
+    <nav th:replace="mesFragments :: fragNav"></nav>
+
+    <main class="container">
+
+        <div class="row col-10 col-sm-8 col-md-6 col-lg-4 mx-auto mt-3">
+
+            <form novalidate class="validation" th:action="@{/admin/type-arme/update}" th:object="${typeArme}"
+                  method="post">
+
+                <h2 class="mb-4">Modification d'une Type d'arme</h2>
+
+
+                <input readonly required type="hidden" name="id" th:field="${typeArme.id}">
+
+
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom du Type d'arme</label>
+                    <input required minlength="3" maxlength="255" type="text" class="form-control" id="nom" name="nom"
+                           th:field="${typeArme.nom}">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="nombreDes" class="form-label">nombreDes</label>
+                    <input required type="number" class="form-control" id="nombreDes" name="nombreDes"
+                           th:field="${typeArme.nombreDes}">
+                </div>
+                <div class="mb-3">
+                    <label for="valeurDeMax" class="form-label">valeurDeMax</label>
+                    <input required type="number" class="form-control" id="valeurDeMax" name="valeurDeMax"
+                           th:field="${typeArme.valeurDeMax}">
+                </div>
+                <div class="mb-3">
+                    <label for="multiplicateurCritique" class="form-label">multiplicateurCritique</label>
+                    <input required type="number" class="form-control" id="multiplicateurCritique" name="multiplicateurCritique"
+                           th:field="${typeArme.multiplicateurCritique}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="activationCritique" class="form-label">activationCritique</label>
+                    <input required type="number" class="form-control" id="activationCritique" name="activationCritique"
+                           th:field="${typeArme.activationCritique}">
+                </div>
+
+                <!-- Bouton de soumission -->
+                <button type="submit" class="btn btn-primary">Modifier</button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+<footer th:replace="mesFragments :: fragFooter"></footer>
+
+<script src="/js/validation.js"></script>
+
+</body>
+
+</html>
+
+

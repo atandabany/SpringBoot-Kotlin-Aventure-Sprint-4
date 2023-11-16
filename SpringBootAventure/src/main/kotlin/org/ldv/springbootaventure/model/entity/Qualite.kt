@@ -1,7 +1,6 @@
 package org.ldv.springbootaventure.model.entity
 
 import jakarta.persistence.*
-import kotlin.jvm.Transient
 
 @Entity
 class Qualite constructor(
@@ -15,7 +14,15 @@ class Qualite constructor(
     var couleur: String,
 
     //@Transient (Permet de supprimer la colonne bonusQualite)
-    var bonusQualite: Int
-) {
+    var bonusQualite: Int,
 
+    //Association entre Qualite et org.ldv.springbootaventure.model.entity.Arme
+    //Une qualite peut avoir plusieurs armes
+    @OneToMany(mappedBy = "qualite", cascade = [CascadeType.REMOVE])
+    var armes: MutableList<Arme> = mutableListOf(),
+
+
+
+    //TODO Ajouter les  autres associations
+) {
 }
