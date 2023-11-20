@@ -24,6 +24,9 @@ class Qualite constructor(
     @OneToMany(mappedBy = "qualite", cascade = [CascadeType.REMOVE])
     var armures: MutableList<Armure> = mutableListOf(),
 
+    @OneToMany(mappedBy = "qualite", cascade = [CascadeType.REMOVE])
+    var accessoires: MutableList<Accessoire> = mutableListOf(),
+
     //TODO Ajouter les  autres associations
 ) {
 }

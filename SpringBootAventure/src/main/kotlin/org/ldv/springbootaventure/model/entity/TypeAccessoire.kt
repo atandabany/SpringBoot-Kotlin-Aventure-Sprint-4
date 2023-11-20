@@ -13,6 +13,6 @@ class TypeAccessoire constructor(
     @Column(name = "id", nullable = false)
     var id : Long? = null,
     var nom : String,
-    var typeBonus: String,
+    var bonusType: String,
 ) {
 }
