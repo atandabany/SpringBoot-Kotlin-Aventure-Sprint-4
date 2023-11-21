@@ -13,12 +13,14 @@
 
     <main class="container">
 
-        <h1 th:text="'Armure '+${accessoire.nom}"></h1>
+        <h1 th:text="'Accessoire '+${accessoire.nom}"></h1>
 
         <ul>
             <li th:text="'Nom : '+ ${accessoire.nom}"></li>
             <li th:text="'Description : '+${accessoire.description}"></li>
             <li th:text="'Chemin Image : '+${accessoire.cheminImage}"></li>
+            <li th:text="'Qualité : '+${accessoire.qualite.nom}"></li>
+            <li th:text="'Type Accessoire : '+${accessoire.typeAccessoire.nom}"></li>
         </ul>
 
     </main>

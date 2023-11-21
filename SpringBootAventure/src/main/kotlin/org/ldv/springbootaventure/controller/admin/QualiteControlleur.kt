@@ -19,6 +19,7 @@ class QualiteControlleur(val qualiteDao: QualiteDAO) {
      */
     @GetMapping("/admin/qualite")
     fun index(model: Model): String {
+
         // Récupère toutes les qualités depuis la base de données
         val qualites = this.qualiteDao.findAll()
 
@@ -40,6 +41,7 @@ class QualiteControlleur(val qualiteDao: QualiteDAO) {
      */
     @GetMapping("/admin/qualite/{id}")
     fun show(@PathVariable id: Long, model: Model): String {
+
         // Récupère la qualité avec l'ID spécifié depuis la base de données
         val uneQualite = this.qualiteDao.findById(id).orElseThrow()
 
@@ -59,6 +61,7 @@ class QualiteControlleur(val qualiteDao: QualiteDAO) {
      */
     @GetMapping("/admin/qualite/create")
     fun create(model: Model): String {
+
         // Crée une nouvelle instance de Qualite avec des valeurs par défaut
         val nouvelleQualite = Qualite(null, "", "", 0)
 
@@ -79,10 +82,13 @@ class QualiteControlleur(val qualiteDao: QualiteDAO) {
      */
     @PostMapping("/admin/qualite")
     fun store(@ModelAttribute nouvelleQualite: Qualite, redirectAttributes: RedirectAttributes): String {
+
         // Sauvegarde la nouvelle qualité dans la base de données
         val savedQualite = this.qualiteDao.save(nouvelleQualite)
+
         // Ajoute un message de succès pour être affiché à la vue suivante
         redirectAttributes.addFlashAttribute("msgSuccess", "Enregistrement de ${savedQualite.nom} réussi")
+
         // Redirige vers la page d'administration des qualités
         return "redirect:/admin/qualite"
     }
@@ -90,6 +96,7 @@ class QualiteControlleur(val qualiteDao: QualiteDAO) {
 
     @GetMapping("/admin/qualite/{id}/edit")
     fun edit(@PathVariable id: Long, model: Model): String {
+
         // Récupère la qualité avec l'ID spécifié depuis la base de données
         val uneQualite = this.qualiteDao.findById(id).orElseThrow()
 
@@ -111,6 +118,7 @@ class QualiteControlleur(val qualiteDao: QualiteDAO) {
      */
     @PostMapping("/admin/qualite/update")
     fun update(@ModelAttribute qualite: Qualite, redirectAttributes: RedirectAttributes): String {
+
         // Recherche de la qualité existante dans la base de données
         val qualiteModifier = this.qualiteDao.findById(qualite.id ?: 0).orElseThrow()
 
@@ -140,6 +148,7 @@ class QualiteControlleur(val qualiteDao: QualiteDAO) {
      */
     @PostMapping("/admin/qualite/delete")
     fun delete(@RequestParam id: Long, redirectAttributes: RedirectAttributes): String {
+
         // Recherche de la qualité à supprimer dans la base de données
         val qualite: Qualite = this.qualiteDao.findById(id).orElseThrow()
 

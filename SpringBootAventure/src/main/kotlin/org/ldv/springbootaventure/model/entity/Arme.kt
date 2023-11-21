@@ -1,5 +1,6 @@
 package org.ldv.springbootaventure.model.entity
 
+import jakarta.persistence.CascadeType
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 import jakarta.persistence.JoinColumn
@@ -14,9 +15,9 @@ class Arme constructor(
     nom: String,
     description: String,
     cheminImage: String?,
-//TODO Attributs spécifiques aux armes
-    //Association entre org.ldv.springbootaventure.model.entity.Arme et Qualite
-    //Plusieurs armes peuvent être rataché a une qualite
+
+    //Association entre org.ldv.springbootaventure.model.entity.Arme et arme
+    //Plusieurs armes peuvent être rataché a une arme
     @ManyToOne
     @JoinColumn(name = "qualite_id")
     var qualite: Qualite? = null,
@@ -24,7 +25,7 @@ class Arme constructor(
     @ManyToOne
     @JoinColumn(name = "typeArme_id")
     var typeArme : TypeArme? = null
-    //TODO Faire l'association avec TypeArme
+
 ) : Item(id, nom, description, cheminImage)
 
 

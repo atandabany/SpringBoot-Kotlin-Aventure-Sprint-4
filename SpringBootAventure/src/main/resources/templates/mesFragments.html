@@ -15,7 +15,7 @@
 </head>
 <body>
 <nav th:fragment="fragNav" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Koltin Aventure</a>
+    <a class="navbar-brand" >Koltin Aventure</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,24 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="/accueil">Home</a>
+            </li>
+
+            <li class="nav-item" >
+                <div class="dropdown">
+                <a class=" dropdown-toggle nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Classes
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/admin/arme">Arme</a></li>
+                    <li><a class="dropdown-item" href="/admin/type-arme">Type Arme</a></li>
+                    <li><a class="dropdown-item" href="/admin/armure">Armure</a></li>
+                    <li><a class="dropdown-item" href="/admin/type-armure">Type Armure</a></li>
+                    <li><a class="dropdown-item" href="/admin/accessoire">Accessoire</a></li>
+                    <li><a class="dropdown-item" href="/admin/type-accessoire">Type Accessoire</a></li>
+                    <li><a class="dropdown-item" href="/admin/qualite">Qualité</a></li>
+                </ul>
+    </div>
             </li>
 
             <li class="nav-item">

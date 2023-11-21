@@ -2,6 +2,7 @@ package org.ldv.springbootaventure.controller.admin
 
 import org.ldv.springbootaventure.model.dao.ArmureDAO
 import org.ldv.springbootaventure.model.dao.QualiteDAO
+import org.ldv.springbootaventure.model.dao.TypeArmureDAO
 import org.ldv.springbootaventure.model.entity.Armure
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 @Controller
-class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
+class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO, val typeArmureDao: TypeArmureDAO) {
+
+
     /**
      * Affiche la liste de toutes les armures.
      *
@@ -18,11 +21,11 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
      */
     @GetMapping("/admin/armure")
     fun index(model: Model): String {
+
         // Récupère toutes les armures depuis la base de données
         val armures = this.armureDao.findAll()
 
-        // Ajoute la liste des armures
-        // au modèle pour affichage dans la vue
+        // Ajoute la liste des armures au modèle pour affichage dans la vue
         model.addAttribute("armures", armures)
 
         // Retourne le nom de la vue à afficher
@@ -40,6 +43,7 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
      */
     @GetMapping("/admin/armure/{id}")
     fun show(@PathVariable id: Long, model: Model): String {
+
         // Récupère l'armure avec l'ID spécifié depuis la base de données
         val uneArmure = this.armureDao.findById(id).orElseThrow()
 
@@ -49,6 +53,8 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
         // Retourne le nom de la vue à afficher
         return "admin/armure/show"
     }
+
+
     /**
      * Affiche le formulaire de création d'une nouvelle armure.
      *
@@ -57,13 +63,16 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
      */
     @GetMapping("/admin/armure/create")
     fun create(model: Model): String {
+
         // Crée une nouvelle instance de Armure avec des valeurs par défaut
         val nouvelleArmure = Armure(0, "", "", "")
         val qualites = qualiteDao.findAll()
+        val typeArmure = typeArmureDao.findAll()
 
         // Ajoute la nouvelle armure et la qualite au modèle pour affichage dans le formulaire de création
         model.addAttribute("nouvelleArmure", nouvelleArmure)
         model.addAttribute("qualites",qualites)
+        model.addAttribute("typeArmure" ,typeArmure)
 
         // Retourne le nom de la vue à afficher (le formulaire de création)
         return "admin/armure/create"
@@ -79,10 +88,13 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
      */
     @PostMapping("/admin/armure")
         fun store(@ModelAttribute nouvelleArmure: Armure, redirectAttributes: RedirectAttributes): String {
+
         // Sauvegarde la nouvelle armure dans la base de données
         val savedArmure = this.armureDao.save(nouvelleArmure)
+
         // Ajoute un message de succès pour être affiché à la vue suivante
         redirectAttributes.addFlashAttribute("msgSuccess", "Enregistrement de ${savedArmure.nom} réussi")
+
         // Redirige vers la page d'administration des armures
         return "redirect:/admin/armure"
     }
@@ -90,11 +102,16 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
 
     @GetMapping("/admin/armure/{id}/edit")
     fun edit(@PathVariable id: Long, model: Model): String {
+
         // Récupère l'armure avec l'ID spécifié depuis la base de données
         val uneArmure = this.armureDao.findById(id).orElseThrow()
+        val qualites = qualiteDao.findAll()
+        val typeArmure = typeArmureDao.findAll()
 
         // Ajoute l'armure au modèle pour affichage dans la vue
         model.addAttribute("armure", uneArmure)
+        model.addAttribute("qualites",qualites)
+        model.addAttribute("typeArmure",typeArmure)
 
         // Retourne le nom de la vue à afficher
         return "admin/armure/edit"
@@ -111,6 +128,7 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
      */
     @PostMapping("/admin/armure/update")
     fun update(@ModelAttribute armure: Armure, redirectAttributes: RedirectAttributes): String {
+
         // Recherche de l'armure existante dans la base de données
         val armureModifier = this.armureDao.findById(armure.id ?: 0).orElseThrow()
 
@@ -118,6 +136,16 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
         armureModifier.nom = armure.nom
         armureModifier.description = armure.description
         armureModifier.cheminImage = armure.cheminImage
+
+        // Récupère le qualite d'un objet "armure" depuis la base de données et le met à jour dans un autre objet "armureModifier"
+        // Autre possibilité => armureModifier.qualite=armure.qualite
+        val laQualite = qualiteDao.findById(armure.qualite!!.id ?:0).orElseThrow()
+        armureModifier.qualite=laQualite
+
+        // Récupère le type d'armure d'un objet "armure" depuis la base de données et le met à jour dans un autre objet "armureModifier".
+        // Autre possibilité => armureModifier.typeArmure=armure.typeArmure
+        val leTypeArmure = typeArmureDao.findById(armure.typeArmure!!.id ?:0).orElseThrow()
+        armureModifier.typeArmure=leTypeArmure
 
         // Sauvegarde l'armure modifiée dans la base de données
         val savedArmure = (this.armureDao).save(armureModifier)
@@ -140,6 +168,7 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO) {
      */
     @PostMapping("/admin/armure/delete")
     fun delete(@RequestParam id: Long, redirectAttributes: RedirectAttributes): String {
+
         // Recherche de l'armure à supprimer dans la base de données
         val armure: Armure = this.armureDao.findById(id).orElseThrow()
 

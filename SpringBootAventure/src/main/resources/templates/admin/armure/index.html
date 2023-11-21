@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Armures</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
 
         <div>
             <a th:href="@{'/admin/armure/create'}" class="btn btn-success">
-                Ajouter une armure
+                Ajouter une Armure
             </a>
         </div>
 
@@ -30,6 +30,8 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Chemin Image</th>
+                <th>Qualité</th>
+                <th>Type Armure</th>
             </tr>
             </thead>
 
@@ -38,6 +40,9 @@
                 <td th:text="${uneArmure.nom}"></td>
                 <td th:text="${uneArmure.description}"></td>
                 <td th:text="${uneArmure.cheminImage}"></td>
+                <td th:text="${uneArmure.qualite.nom}"></td>
+                <td th:text="${uneArmure.typeArmure.nom}"></td>
+
                 <td class="d-flex">
                     <a th:href="@{'/admin/armure/'+${uneArmure.id}+'/edit'}" class="btn btn-warning">
                         Modifier

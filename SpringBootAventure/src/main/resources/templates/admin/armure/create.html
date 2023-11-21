@@ -47,9 +47,13 @@
                     </select>
                 </div>
 
+                <div class="mb-3">
+                    <label for="typeArmure" class="form-label">Type Armure</label>
+                    <select class="form-select" id="typeArmure" th:field="${nouvelleArmure.typeArmure.id}">
+                        <option th:each="unTypeArmure : ${typeArmure}" th:value="${unTypeArmure.id}" th:text="${untypeArmure.nom}"></option>
+                    </select>
 
-
-
+                </div>
 
                     <!-- Bouton de soumission -->
                 <button type="submit" class="btn btn-primary">Ajouter</button>

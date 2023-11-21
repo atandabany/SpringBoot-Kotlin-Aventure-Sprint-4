@@ -37,6 +37,26 @@
                            name="description" th:field="${armure.description}">
                 </div>
 
+                <div class="mb-3">
+                    <label for="cheminImage" class="form-label">Chemin d'image</label>
+                    <input type="text" class="form-control" id="cheminImage" name="cheminImage"
+                           th:field="${armure.cheminImage}">
+                </div>
+
+                <div class="mb-3">
+                <label for="qualite" class="form-label">Qualité</label>
+                <select class="form-select" id="qualite" th:field="${armure.qualite.id}">
+                    <option th:selected="${uneQualite.id == armure.qualite.id}" th:each="uneQualite : ${qualites}" th:value="${uneQualite.id}" th:text="${uneQualite.nom}"></option>
+                </select>
+                </div>
+
+                <div class="mb-3">
+                <label for="typeArmure" class="form-label">Type d'Armure</label>
+                <select class="form-select" id="typeArmure" th:field="${armure.typeArmure.id}">
+                    <option th:selected="${untypeArmure.id == armure.typeArmure.id}" th:each="untypeArmure : ${typeArmure}" th:value="${untypeArmure.id}" th:text="${untypeArmure.nom}"></option>
+                </select>
+                </div>
+
                 <!-- Bouton de soumission -->
                 <button type="submit" class="btn btn-primary">Modifier</button>
 

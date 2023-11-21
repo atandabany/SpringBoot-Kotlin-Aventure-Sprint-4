@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Armes</title>
 </head>
 
 <body>
@@ -15,11 +15,11 @@
 
     <main class="container">
 
-        <h1>Gestion des Arme</h1>
+        <h1>Gestion des Armes</h1>
 
         <div>
             <a th:href="@{'/admin/arme/create'}" class="btn btn-success">
-                Ajouter une arme
+                Ajouter une Arme
             </a>
         </div>
 
@@ -28,8 +28,10 @@
             <thead>
             <tr>
                 <th>Nom</th>
-                <th>description</th>
-                <th>cheminImage</th>
+                <th>Description</th>
+                <th>Chemin Image</th>
+                <th>Qualité</th>
+                <th>Type Arme</th>
             </tr>
             </thead>
 
@@ -38,6 +40,9 @@
                 <td th:text="${uneArme.nom}"></td>
                 <td th:text="${uneArme.description}"></td>
                 <td th:text="${uneArme.cheminImage}"></td>
+                <td th:text="${uneArme.qualite.nom}"></td>
+                <td th:text="${uneArme.typeArme.nom}"></td>
+
                 <td class="d-flex">
                     <a th:href="@{'/admin/arme/'+${uneArme.id}+'/edit'}" class="btn btn-warning">
                         Modifier

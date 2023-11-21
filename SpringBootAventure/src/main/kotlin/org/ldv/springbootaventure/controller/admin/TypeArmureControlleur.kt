@@ -19,6 +19,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
      */
     @GetMapping("/admin/type-armure")
     fun index(model: Model): String {
+
         // Récupère toutes les types d'armures depuis la base de données
         val typeArmures = this.typeArmureDao.findAll()
 
@@ -40,6 +41,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
      */
     @GetMapping("/admin/type-armure/{id}")
     fun show(@PathVariable id: Long, model: Model): String {
+
         // Récupère la qualité avec l'ID spécifié depuis la base de données
         val unTypeArmure = this.typeArmureDao.findById(id).orElseThrow()
 
@@ -59,6 +61,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
      */
     @GetMapping("/admin/type-armure/create")
     fun create(model: Model): String {
+
         // Crée une nouvelle instance de TypeArmure avec des valeurs par défaut
         val nouveauTypeArmure = TypeArmure(null, "",0)
 
@@ -79,10 +82,13 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
      */
     @PostMapping("/admin/type-armure")
     fun store(@ModelAttribute nouveauTypeArmure: TypeArmure, redirectAttributes: RedirectAttributes): String {
+
         // Sauvegarde la nouveau type d'armure dans la base de données
         val savedTypeArmure = this.typeArmureDao.save(nouveauTypeArmure)
+
         // Ajoute un message de succès pour être affiché à la vue suivante
         redirectAttributes.addFlashAttribute("msgSuccess", "Enregistrement de ${savedTypeArmure.nom} réussi")
+
         // Redirige vers la page d'administration des types d'armure
         return "redirect:/admin/type-armure"
     }
@@ -90,6 +96,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
 
     @GetMapping("/admin/type-armure/{id}/edit")
     fun edit(@PathVariable id: Long, model: Model): String {
+
         // Récupère le type d'armure avec l'ID spécifié depuis la base de données
         val unTypeArmure = this.typeArmureDao.findById(id).orElseThrow()
 
@@ -111,6 +118,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
      */
     @PostMapping("/admin/type-armure/update")
     fun update(@ModelAttribute typeArmure: TypeArmure, redirectAttributes: RedirectAttributes): String {
+
         // Recherche du type d'armure existant dans la base de données
         val typeArmureModifier = this.typeArmureDao.findById(typeArmure.id ?: 0).orElseThrow()
 
@@ -139,6 +147,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
      */
     @PostMapping("/admin/type-armure/delete")
     fun delete(@RequestParam id: Long, redirectAttributes: RedirectAttributes): String {
+
         // Recherche du type d'armure à supprimer dans la base de données
         val typeArmure: TypeArmure = this.typeArmureDao.findById(id).orElseThrow()
 

@@ -60,7 +60,7 @@ class TypeAccessoireControlleur(val typeAccessoireDAO: TypeAccessoireDAO) {
         // Crée une nouvelle instance de Qualite avec des valeurs par défaut
         val nouveauTypeAccessoire = TypeAccessoire(null, "", "")
 
-        // Ajoute la nouvelle qualité au modèle pour affichage dans le formulaire de création
+        // Ajoute le nouveau type accessoire au modèle pour affichage dans le formulaire de création
         model.addAttribute("nouveauTypeAccessoire", nouveauTypeAccessoire)
 
         // Retourne le nom de la vue à afficher (le formulaire de création)
@@ -70,23 +70,23 @@ class TypeAccessoireControlleur(val typeAccessoireDAO: TypeAccessoireDAO) {
     /**
      * Gère la soumission du formulaire d'ajout de type d'armure.
      *
-     * @param nouveau type d'armure L'objet TypeArmure créé à partir des données du formulaire.
+     * @param nouveau type d'accessoire L'objet TypeAccessoire créé à partir des données du formulaire.
      * @param redirectAttributes Les attributs de redirection pour transmettre des messages à la vue suivante.
-     * @return La redirection vers la page d'administration des types d'armure après l'ajout réussi.
+     * @return La redirection vers la page d'administration des types d'accessoire après l'ajout réussi.
      */
     @PostMapping("/admin/type-accessoire")
     fun store(@ModelAttribute nouveauTypeAccessoire: TypeAccessoire, redirectAttributes: RedirectAttributes): String {
-        // Sauvegarde la nouveau type d'armure dans la base de données
+        // Sauvegarde la nouveau type d'accessoire dans la base de données
         val savedTypeAccessoire = this.typeAccessoireDAO.save(nouveauTypeAccessoire)
         // Ajoute un message de succès pour être affiché à la vue suivante
         redirectAttributes.addFlashAttribute("msgSuccess", "Enregistrement de ${savedTypeAccessoire.nom} réussi")
-        // Redirige vers la page d'administration des types d'armure
+        // Redirige vers la page d'administration des types d'accessoire
         return "redirect:/admin/type-accessoire"
     }
 
     @GetMapping("/admin/type-accessoire/{id}/edit")
     fun edit(@PathVariable id: Long, model: Model): String {
-        // Récupère la qualité avec l'ID spécifié depuis la base de données
+        // Récupère le type d'accessoire avec l'ID spécifié depuis la base de données
         val unAccessoire = this.typeAccessoireDAO.findById(id).orElseThrow()
 
         // Ajoute la qualité au modèle pour affichage dans la vue
@@ -126,7 +126,7 @@ class TypeAccessoireControlleur(val typeAccessoireDAO: TypeAccessoireDAO) {
     /**
      * Gère la suppression d'une qualité par son identifiant.
      *
-     * @param id L'identifiant de la qualité à supprimer.
+     * @param id L'identifiant du type d'accessoire à supprimer.
      * @param redirectAttributes Les attributs de redirection pour transmettre des messages à la vue suivante.
      * @return La redirection vers la page d'administration des qualités après la suppression réussie.
      * @throws NoSuchElementException si la qualité avec l'ID spécifié n'est pas trouvée dans la base de données.
@@ -136,13 +136,13 @@ class TypeAccessoireControlleur(val typeAccessoireDAO: TypeAccessoireDAO) {
         // Recherche de la qualité à supprimer dans la base de données
         val typeAccessoire: TypeAccessoire = this.typeAccessoireDAO.findById(id).orElseThrow()
 
-        // Suppression de la qualité de la base de données
+        // Suppression du type d'accessoire de la base de données
         this.typeAccessoireDAO.delete(typeAccessoire)
 
         // Ajoute un message de succès pour être affiché à la vue suivante
         redirectAttributes.addFlashAttribute("msgSuccess", "Suppression de ${typeAccessoire.nom} réussie")
 
-        // Redirige vers la page d'administration des qualités
+        // Redirige vers la page d'administration du type d'accessoire
         return "redirect:/admin/type-accessoire"
     }
 }
