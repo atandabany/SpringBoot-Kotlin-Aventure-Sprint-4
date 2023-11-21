@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Qualité</title>
 </head>
 
 <body>
@@ -34,7 +34,12 @@
                            th:field="${nouvelleQualite.couleur}">
                 </div>
 
-
+                <!-- Input pour le bonus de la qualité -->
+                <div class="mb-3">
+                    <label for="bonusQualite" class="form-label">Bonus de la Qualité</label>
+                    <input required min="0" max="99" type="number" class="form-control" id="bonusQualite"
+                           name="bonusQualite" th:field="${nouvelleQualite.bonusQualite}">
+                </div>
 
                 <!-- Bouton de soumission -->
                 <button type="submit" class="btn btn-primary">Ajouter</button>

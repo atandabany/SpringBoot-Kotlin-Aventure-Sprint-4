@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Show Type Arme</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 
     <main class="container">
 
-        <h1  th:text="'Type Arme '+${typeArme.nom}"></h1>
+        <h1 th:text="'Type Arme '+${typeArme.nom}"></h1>
 
         <ul>
             <li th:text="'Nom : '+ ${typeArme.nom}"></li>
@@ -21,7 +21,6 @@
             <li th:text="'Valeur Dé Max : '+ ${typeArme.valeurDeMax}"></li>
             <li th:text="'Multiplicateur Critique : '+ ${typeArme.multiplicateurCritique}"></li>
             <li th:text="'Activation Critique : '+ ${typeArme.activationCritique}"></li>
-
         </ul>
 
     </main>

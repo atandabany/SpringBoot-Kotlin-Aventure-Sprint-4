@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Arme</title>
 </head>
 
 <body>
@@ -15,41 +15,47 @@
 
         <div class="row col-10 col-sm-8 col-md-6 col-lg-4 mx-auto mt-3">
 
-            <form novalidate class="validation" th:action="@{'/admin/arme'}"  th:object="${nouvelleArme}"
+            <form novalidate class="validation" th:action="@{'/admin/arme'}" th:object="${nouvelleArme}"
                   method="post">
 
                 <h2 class="mb-4">Ajouter une Arme</h2>
 
-
+                <!-- Input pour le nom de l'arme -->
                 <div class="mb-3">
-                    <label for="nom" class="form-label">Nom</label>
+                    <label for="nom" class="form-label">Nom de l'Arme</label>
                     <input required minlength="3" maxlength="255" type="text" class="form-control" id="nom" name="nom"
                            th:field="${nouvelleArme.nom}">
                 </div>
 
+                <!-- Input pour la description de l'arme -->
                 <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <input required minlength="3" maxlength="255" type="text" class="form-control" id="description" name="nom"
-                           th:field="${nouvelleArme.description}">
+                    <label for="description" class="form-label">Description de l'Arme</label>
+                    <input required minlength="3" maxlength="255" type="text" class="form-control" id="description"
+                           name="nom" th:field="${nouvelleArme.description}">
                 </div>
 
+                <!-- Input pour le chemin d'image de l'arme -->
                 <div class="mb-3">
-                    <label for="cheminImage" class="form-label">chemin d'image</label>
+                    <label for="cheminImage" class="form-label">Chemin Image</label>
                     <input type="text" class="form-control" id="cheminImage" name="nom"
                            th:field="${nouvelleArme.cheminImage}">
                 </div>
 
+                <!-- Liste déroulante qualité -->
                 <div class="mb-3">
                     <label for="qualite" class="form-label">Qualité</label>
                     <select class="form-select" id="qualite" th:field="${nouvelleArme.qualite.id}">
-                        <option th:each="uneQualite : ${qualites}" th:value="${uneQualite.id}" th:text="${uneQualite.nom}"></option>
+                        <option th:each="uneQualite : ${qualites}" th:value="${uneQualite.id}"
+                                th:text="${uneQualite.nom}"></option>
                     </select>
                 </div>
 
+                <!-- Liste déroulante type d'arme -->
                 <div class="mb-3">
                     <label for="typearme" class="form-label">Type Arme</label>
                     <select class="form-select" id="typearme" th:field="${nouvelleArme.typeArme.id}">
-                        <option th:each="unetypeArme : ${typeArme}" th:value="${unetypeArme.id}" th:text="${unetypeArme.nom}"></option>
+                        <option th:each="unetypeArme : ${typeArme}" th:value="${unetypeArme.id}"
+                                th:text="${unetypeArme.nom}"></option>
                     </select>
                 </div>
 

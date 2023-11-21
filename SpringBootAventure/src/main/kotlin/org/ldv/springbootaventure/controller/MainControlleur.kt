@@ -20,6 +20,7 @@ class MainControlleur {
     fun login():String{
         return "visiteur/login"
     }
+
     @GetMapping("/inscription")
     fun inscription():String{
         return "visiteur/inscription"

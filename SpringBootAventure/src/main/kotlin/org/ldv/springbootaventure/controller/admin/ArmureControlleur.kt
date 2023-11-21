@@ -69,7 +69,7 @@ class ArmureControlleur (val armureDao: ArmureDAO, val qualiteDao: QualiteDAO, v
         val qualites = qualiteDao.findAll()
         val typeArmure = typeArmureDao.findAll()
 
-        // Ajoute la nouvelle armure et la qualite au modèle pour affichage dans le formulaire de création
+        // Ajoute la nouvelle armure, la qualite et le type armure  au modèle pour affichage dans le formulaire de création
         model.addAttribute("nouvelleArmure", nouvelleArmure)
         model.addAttribute("qualites",qualites)
         model.addAttribute("typeArmure" ,typeArmure)

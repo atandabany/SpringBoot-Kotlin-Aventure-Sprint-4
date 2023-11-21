@@ -23,7 +23,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         // Récupère toutes les types d'armures depuis la base de données
         val typeArmures = this.typeArmureDao.findAll()
 
-        // Ajoute la liste des qualités au modèle pour affichage dans la vue
+        // Ajoute la liste des types d'armures au modèle pour affichage dans la vue
         model.addAttribute("typeArmures", typeArmures)
 
         // Retourne le nom de la vue à afficher
@@ -42,10 +42,10 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
     @GetMapping("/admin/type-armure/{id}")
     fun show(@PathVariable id: Long, model: Model): String {
 
-        // Récupère la qualité avec l'ID spécifié depuis la base de données
+        // Récupère le type d'armure avec l'ID spécifié depuis la base de données
         val unTypeArmure = this.typeArmureDao.findById(id).orElseThrow()
 
-        // Ajoute la qualité au modèle pour affichage dans la vue
+        // Ajoute le type d'armure au modèle pour affichage dans la vue
         model.addAttribute("typeArmure", unTypeArmure)
 
         // Retourne le nom de la vue à afficher
@@ -65,7 +65,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         // Crée une nouvelle instance de TypeArmure avec des valeurs par défaut
         val nouveauTypeArmure = TypeArmure(null, "",0)
 
-        // Ajoute la nouveau type d'armure au modèle pour affichage dans le formulaire de création
+        // Ajoute le nouveau type d'armure au modèle pour affichage dans le formulaire de création
         model.addAttribute("nouveauTypeArmure", nouveauTypeArmure)
 
         // Retourne le nom de la vue à afficher (le formulaire de création)
@@ -76,14 +76,14 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
     /**
      * Gère la soumission du formulaire d'ajout de type d'armure.
      *
-     * @param nouveau type d'armure L'objet TypeArmure créé à partir des données du formulaire.
+     * @param nouveauTypeArmure L'objet TypeArmure créé à partir des données du formulaire.
      * @param redirectAttributes Les attributs de redirection pour transmettre des messages à la vue suivante.
      * @return La redirection vers la page d'administration des types d'armure après l'ajout réussi.
      */
     @PostMapping("/admin/type-armure")
     fun store(@ModelAttribute nouveauTypeArmure: TypeArmure, redirectAttributes: RedirectAttributes): String {
 
-        // Sauvegarde la nouveau type d'armure dans la base de données
+        // Sauvegarde le nouveau type d'armure dans la base de données
         val savedTypeArmure = this.typeArmureDao.save(nouveauTypeArmure)
 
         // Ajoute un message de succès pour être affiché à la vue suivante
@@ -122,7 +122,7 @@ class TypeArmureControlleur(val typeArmureDao: TypeArmureDAO) {
         // Recherche du type d'armure existant dans la base de données
         val typeArmureModifier = this.typeArmureDao.findById(typeArmure.id ?: 0).orElseThrow()
 
-        // Mise à jour des propriétés de la qualité avec les nouvelles valeurs du formulaire
+        // Mise à jour des propriétés du type d'armure avec les nouvelles valeurs du formulaire
         typeArmureModifier.nom = typeArmure.nom
         typeArmureModifier.bonusType = typeArmure.bonusType
 

@@ -15,7 +15,7 @@
 </head>
 <body>
 <nav th:fragment="fragNav" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" >Koltin Aventure</a>
+    <a class="navbar-brand">Koltin Aventure</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,21 +27,21 @@
                 <a class="nav-link" href="/accueil">Home</a>
             </li>
 
-            <li class="nav-item" >
+            <li class="nav-item">
                 <div class="dropdown">
-                <a class=" dropdown-toggle nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Classes
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/admin/arme">Arme</a></li>
-                    <li><a class="dropdown-item" href="/admin/type-arme">Type Arme</a></li>
-                    <li><a class="dropdown-item" href="/admin/armure">Armure</a></li>
-                    <li><a class="dropdown-item" href="/admin/type-armure">Type Armure</a></li>
-                    <li><a class="dropdown-item" href="/admin/accessoire">Accessoire</a></li>
-                    <li><a class="dropdown-item" href="/admin/type-accessoire">Type Accessoire</a></li>
-                    <li><a class="dropdown-item" href="/admin/qualite">Qualité</a></li>
-                </ul>
-    </div>
+                    <a class=" dropdown-toggle nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Classes
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/admin/arme">Arme</a></li>
+                        <li><a class="dropdown-item" href="/admin/type-arme">Type Arme</a></li>
+                        <li><a class="dropdown-item" href="/admin/armure">Armure</a></li>
+                        <li><a class="dropdown-item" href="/admin/type-armure">Type Armure</a></li>
+                        <li><a class="dropdown-item" href="/admin/accessoire">Accessoire</a></li>
+                        <li><a class="dropdown-item" href="/admin/type-accessoire">Type Accessoire</a></li>
+                        <li><a class="dropdown-item" href="/admin/qualite">Qualité</a></li>
+                    </ul>
+                </div>
             </li>
 
             <li class="nav-item">
@@ -49,14 +49,14 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" th:href="@{'inscription'}">Inscription</a>
+                <a class="nav-link" th:href="@{'inscription'}">Register</a>
             </li>
 
         </ul>
     </div>
 </nav>
 <div th:fragment="fragFlashSuccess">
-    <div  class="toast-container position-fixed tom-0 end-0 p-3" >
+    <div class="toast-container position-fixed tom-0 end-0 p-3">
         <!-- Toast de Bootstrap -->
         <div th:if="${msgSuccess != null}" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-success">
@@ -68,6 +68,6 @@
         </div>
     </div>
 </div>
-    <footer th:fragment="fragFooter">Team : ADS</footer>
+<footer th:fragment="fragFooter">Team : ADS</footer>
 </body>
 </html>

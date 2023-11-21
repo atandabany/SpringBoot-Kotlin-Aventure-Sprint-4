@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Type Arme</title>
 </head>
 
 <body>
@@ -18,40 +18,44 @@
             <form novalidate class="validation" th:action="@{/admin/type-arme}" th:object="${nouvelleType}"
                   method="post">
 
-                <h2 class="mb-4">Ajouter un Type d'org.ldv.springbootaventure.model.entity.Arme</h2>
+                <h2 class="mb-4">Ajouter un Type d'Arme</h2>
 
-
+                <!-- Input pour le nom du type d'arme -->
                 <div class="mb-3">
-                    <label for="nom" class="form-label">Nom Type d'arme</label>
+                    <label for="nom" class="form-label">Nom du Type d'Arme</label>
                     <input required minlength="3" maxlength="255" type="text" class="form-control" id="nom" name="nom"
                            th:field="${nouvelleType.nom}">
                 </div>
 
-
-
+                <!-- Liste déroulante nombre de dés -->
                 <div class="mb-3">
-                    <label for="nombreDes" class="form-label">nombreDes</label>
+                    <label for="nombreDes" class="form-label">Nombre de Dés</label>
                     <input required min="0" max="99" type="number" class="form-control" id="nombreDes"
                            name="nombreDes" th:field="${nouvelleType.nombreDes}">
                 </div>
 
+                <!-- Liste déroulante valeur dé max -->
                 <div class="mb-3">
-                    <label for="valeurDeMax" class="form-label">valeurDeMax</label>
+                    <label for="valeurDeMax" class="form-label">Valeur Dé Max</label>
                     <input required min="0" max="99" type="number" class="form-control" id="valeurDeMax"
                            name="nombreDes" th:field="${nouvelleType.valeurDeMax}">
                 </div>
+
+                <!-- Liste déroulante multiplicateur critique -->
                 <div class="mb-3">
-                    <label for="multiplicateurCritique" class="form-label">multiplicateurCritique</label>
+                    <label for="multiplicateurCritique" class="form-label">Multiplicateur Critique</label>
                     <input required min="0" max="99" type="number" class="form-control" id="multiplicateurCritique"
                            name="multiplicateurCritique" th:field="${nouvelleType.multiplicateurCritique}">
                 </div>
+
+                <!-- Liste déroulante activation critique -->
                 <div class="mb-3">
-                    <label for="activationCritique" class="form-label">activationCritique</label>
+                    <label for="activationCritique" class="form-label">Activation Critique</label>
                     <input required min="0" max="99" type="number" class="form-control" id="activationCritique"
                            name="activationCritique" th:field="${nouvelleType.activationCritique}">
                 </div>
 
-
+                <!-- Bouton de soumission -->
                 <button type="submit" class="btn btn-primary">Ajouter</button>
 
             </form>

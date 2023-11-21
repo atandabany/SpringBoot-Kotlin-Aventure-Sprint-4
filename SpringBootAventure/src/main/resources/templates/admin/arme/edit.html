@@ -2,7 +2,7 @@
 <html lang="en">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Arme</title>
 </head>
 
 <body>
@@ -20,29 +20,31 @@
 
                 <h2 class="mb-4">Modification d'une Arme</h2>
 
-
+                <!-- Input pour l'id de l'arme -->
                 <input readonly required type="hidden" name="id" th:field="${arme.id}">
 
-
+                <!-- Input pour le nom de l'arme -->
                 <div class="mb-3">
-                    <label for="nom" class="form-label">Nom</label>
+                    <label for="nom" class="form-label">Nom de l'Arme</label>
                     <input required minlength="3" maxlength="255" type="text" class="form-control" id="nom" name="nom"
                            th:field="${arme.nom}">
                 </div>
 
+                <!-- Input pour la description de l'arme -->
                 <div class="mb-3">
-                    <label for="description" class="form-label">description</label>
+                    <label for="description" class="form-label">Description de l'Arme</label>
                     <input required minlength="3" maxlength="255" type="text" class="form-control" id="description" name="description"
                            th:field="${arme.description}">
                 </div>
 
-
+                <!-- Input pour le chemin d'image de l'arme -->
                 <div class="mb-3">
-                    <label for="cheminImage" class="form-label">chemin d'image</label>
+                    <label for="cheminImage" class="form-label">Chemin Image</label>
                     <input type="text" class="form-control" id="cheminImage" name="cheminImage"
                            th:field="${arme.cheminImage}">
                 </div>
 
+                <!-- Liste déroulante qualité -->
                 <div class="mb-3">
                 <label for="qualite" class="form-label">Qualité</label>
                 <select class="form-select" id="qualite" th:field="${arme.qualite.id}">
@@ -50,12 +52,14 @@
                 </select>
                 </div>
 
+                <!-- Liste déroulante type d'arme -->
                 <div class="mb-3">
-                <label for="type-arme" class="form-label">Type d'arme</label>
+                <label for="type-arme" class="form-label">Type d'Arme</label>
                 <select class="form-select" id="type-arme" th:field="${arme.typeArme.id}">
                     <option th:selected="${unetypeArme.id == arme.typeArme.id}" th:each="unetypeArme : ${typeArme}" th:value="${unetypeArme.id}" th:text="${unetypeArme.nom}"></option>
                 </select>
                 </div>
+
                 <!-- Bouton de soumission -->
                 <button type="submit" class="btn btn-primary">Modifier</button>
 
@@ -74,5 +78,3 @@
 </body>
 
 </html>
-
-

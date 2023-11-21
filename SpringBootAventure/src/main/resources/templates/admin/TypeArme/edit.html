@@ -2,7 +2,7 @@
 <html lang="en">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Type Arme</title>
 </head>
 
 <body>
@@ -20,35 +20,41 @@
 
                 <h2 class="mb-4">Modification d'une Type d'arme</h2>
 
-
+                <!-- Input pour l'id de type d'arme -->
                 <input readonly required type="hidden" name="id" th:field="${typeArme.id}">
 
-
+                <!-- Input pour le nom du type d'arme -->
                 <div class="mb-3">
-                    <label for="nom" class="form-label">Nom du Type d'arme</label>
+                    <label for="nom" class="form-label">Nom du Type d'Arme</label>
                     <input required minlength="3" maxlength="255" type="text" class="form-control" id="nom" name="nom"
                            th:field="${typeArme.nom}">
                 </div>
 
-
+                <!-- Liste déroulante nombre de dés -->
                 <div class="mb-3">
-                    <label for="nombreDes" class="form-label">nombreDes</label>
+                    <label for="nombreDes" class="form-label">Nombre de Dés</label>
                     <input required type="number" class="form-control" id="nombreDes" name="nombreDes"
                            th:field="${typeArme.nombreDes}">
                 </div>
+
+                <!-- Liste déroulante valeur dé max -->
                 <div class="mb-3">
-                    <label for="valeurDeMax" class="form-label">valeurDeMax</label>
+                    <label for="valeurDeMax" class="form-label">Valeur Dé Max</label>
                     <input required type="number" class="form-control" id="valeurDeMax" name="valeurDeMax"
                            th:field="${typeArme.valeurDeMax}">
                 </div>
+
+                <!-- Liste déroulante multiplicateur critique -->
                 <div class="mb-3">
-                    <label for="multiplicateurCritique" class="form-label">multiplicateurCritique</label>
-                    <input required type="number" class="form-control" id="multiplicateurCritique" name="multiplicateurCritique"
+                    <label for="multiplicateurCritique" class="form-label">Multiplicateur Critique</label>
+                    <input required type="number" class="form-control" id="multiplicateurCritique"
+                           name="multiplicateurCritique"
                            th:field="${typeArme.multiplicateurCritique}">
                 </div>
 
+                <!-- Liste déroulante activation critique -->
                 <div class="mb-3">
-                    <label for="activationCritique" class="form-label">activationCritique</label>
+                    <label for="activationCritique" class="form-label">Activation Critique</label>
                     <input required type="number" class="form-control" id="activationCritique" name="activationCritique"
                            th:field="${typeArme.activationCritique}">
                 </div>

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Show Arme</title>
 </head>
 
 <body>
@@ -13,15 +13,14 @@
 
     <main class="container">
 
-        <h1  th:text="'Arme'+${arme.nom}"></h1>
+        <h1 th:text="'Arme '+${arme.nom}"></h1>
 
         <ul>
             <li th:text="'Nom : '+ ${arme.nom}"></li>
             <li th:text="'Description : '+${arme.description}"></li>
-            <li th:text="'Chemin dimage : '+${arme.cheminImage}"></li>
+            <li th:text="'Chemin Image : '+${arme.cheminImage}"></li>
             <li th:text="'Qualité : '+${arme.qualite.nom}"></li>
-            <li th:text="'Type arme : '+${arme.typeArme.nom}"></li>
-
+            <li th:text="'Type Arme : '+${arme.typeArme.nom}"></li>
         </ul>
 
     </main>

@@ -1,10 +1,6 @@
 package org.ldv.springbootaventure.model.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
 class TypeAccessoire constructor(
@@ -14,5 +10,8 @@ class TypeAccessoire constructor(
     var id : Long? = null,
     var nom : String,
     var bonusType: String,
+    @OneToMany(mappedBy = "typeAccessoire", cascade = [CascadeType.REMOVE])
+    var accessoires: MutableList<Accessoire> = mutableListOf()
 ) {
+
 }

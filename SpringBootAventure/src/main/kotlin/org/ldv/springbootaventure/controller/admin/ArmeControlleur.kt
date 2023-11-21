@@ -4,7 +4,6 @@ import org.ldv.springbootaventure.model.dao.ArmeDAO
 import org.ldv.springbootaventure.model.dao.QualiteDAO
 import org.ldv.springbootaventure.model.dao.TypeArmeDAO
 import org.ldv.springbootaventure.model.entity.Arme
-import org.ldv.springbootaventure.model.entity.Qualite
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -12,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 @Controller
 class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO, private val typeArmeDAO: TypeArmeDAO){
+
 
     /**
      * Affiche la liste de toutes les arme
@@ -64,12 +64,12 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
     @GetMapping("/admin/arme/create")
     fun create(model: Model): String {
 
-        // Crée une nouvelle instance d'arme avec des valeurs par défaut
+        // Crée une nouvelle instance de Arme avec des valeurs par défaut
         val nouvelleArme = Arme(0,"" , "" , "")
         val qualites = qualiteDAO.findAll()
         val typeArme = typeArmeDAO.findAll()
 
-        // Ajoute la nouvelle arme au modèle pour affichage dans le formulaire de création
+        // Ajoute la nouvelle arme, la qualité et le type d'arme au modèle pour affichage dans le formulaire de création
         model.addAttribute("nouvelleArme",nouvelleArme)
         model.addAttribute("qualites",qualites)
         model.addAttribute("typeArme" ,typeArme)
@@ -89,10 +89,8 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
     @PostMapping("/admin/arme")
     fun store(@ModelAttribute nouvelleArme:Arme, redirectAttributes: RedirectAttributes): String {
 
-        // Sauvegarde la nouvelle qualité dans la base de données
-
+        // Sauvegarde la nouvelle arme dans la base de données
         val savedArme = this.armeDao.save(nouvelleArme)
-        //savedArme.qualite=nouvelleQualite
 
         // Ajoute un message de succès pour être affiché à la vue suivante
         redirectAttributes.addFlashAttribute("msgSuccess", "Enregistrement de ${savedArme.nom} réussi")
@@ -100,6 +98,7 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
         // Redirige vers la page d'administration des armes
         return "redirect:/admin/arme"
     }
+
 
     @GetMapping("/admin/arme/{id}/edit")
     fun edit(@PathVariable id: Long, model: Model): String {
@@ -118,26 +117,33 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
         return "admin/arme/edit"
     }
 
+
     /**
-     * Gère la soumission du formulaire de mise à jour de qualité.
+     * Gère la soumission du formulaire de mise à jour de arme.
      *
      * @param Arme L'objet Arme mis à jour à partir des données du formulaire.
      * @param redirectAttributes Les attributs de redirection pour transmettre des messages à la vue suivante.
-     * @return La redirection vers la page d'administration des qualités après la mise à jour réussie.
-     * @throws NoSuchElementException si la qualité avec l'ID spécifié n'est pas trouvée dans la base de données.
+     * @return La redirection vers la page d'administration des armes après la mise à jour réussie.
+     * @throws NoSuchElementException si l'arme avec l'ID spécifié n'est pas trouvée dans la base de données.
      */
     @PostMapping("/admin/arme/update")
     fun update(@ModelAttribute arme: Arme, redirectAttributes: RedirectAttributes): String {
 
-        // Recherche de la qualité existante dans la base de données
+        // Recherche de l'arme existante dans la base de données
         val armeModifier = this.armeDao.findById(arme.id ?: 0).orElseThrow()
 
         // Mise à jour des propriétés de l'arme avec les nouvelles valeurs du formulaire
         armeModifier.nom = arme.nom
         armeModifier.description = arme.description
         armeModifier.cheminImage = arme.cheminImage
+
+        // Récupère le qualite d'un objet "arme" depuis la base de données et le met à jour dans un autre objet "armeModifier"
+        // Autre possibilité => armeModifier.qualite=arme.qualite
         val laQualite = qualiteDAO.findById(arme.qualite!!.id ?:0).orElseThrow()
         armeModifier.qualite=laQualite
+
+        // Récupère le type d'arme d'un objet "arme" depuis la base de données et le met à jour dans un autre objet "armeModifier".
+        // Autre possibilité => armeModifier.typeArme=arme.typeArme
         val leTypeArme= typeArmeDAO.findById(arme.typeArme!!.id ?:0).orElseThrow()
         armeModifier.typeArme= leTypeArme
 
@@ -162,6 +168,7 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
      */
     @PostMapping("/admin/arme/delete")
     fun delete(@RequestParam id: Long, redirectAttributes: RedirectAttributes): String {
+
         // Recherche de l'arme à supprimer dans la base de données
         val arme: Arme = this.armeDao.findById(id).orElseThrow()
 
@@ -174,6 +181,4 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
         // Redirige vers la page d'administration des armes
         return "redirect:/admin/arme"
     }
-
-
 }
