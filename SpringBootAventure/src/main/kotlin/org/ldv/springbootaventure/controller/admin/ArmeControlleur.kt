@@ -14,7 +14,7 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
 
 
     /**
-     * Affiche la liste de toutes les arme
+     * Affiche la liste de toutes les armes
      *
      * @param model Le modèle utilisé pour transmettre les données à la vue.
      * @return Le nom de la vue à afficher.
@@ -119,9 +119,9 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
 
 
     /**
-     * Gère la soumission du formulaire de mise à jour de arme.
+     * Gère la soumission du formulaire de mise à jour de l'arme.
      *
-     * @param Arme L'objet Arme mis à jour à partir des données du formulaire.
+     * @param arme L'objet Arme mis à jour à partir des données du formulaire.
      * @param redirectAttributes Les attributs de redirection pour transmettre des messages à la vue suivante.
      * @return La redirection vers la page d'administration des armes après la mise à jour réussie.
      * @throws NoSuchElementException si l'arme avec l'ID spécifié n'est pas trouvée dans la base de données.

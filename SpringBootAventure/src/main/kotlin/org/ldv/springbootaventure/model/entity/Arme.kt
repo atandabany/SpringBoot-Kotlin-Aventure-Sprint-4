@@ -17,7 +17,7 @@ class Arme constructor(
     cheminImage: String?,
 
     //Association entre org.ldv.springbootaventure.model.entity.Arme et arme
-    //Plusieurs armes peuvent être rataché a une arme
+    //Plusieurs armes peuvent être rataché à une arme
     @ManyToOne
     @JoinColumn(name = "qualite_id")
     var qualite: Qualite? = null,

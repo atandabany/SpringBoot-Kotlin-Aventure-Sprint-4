@@ -12,7 +12,7 @@ class TypeArmeControlleur(val typeArmeDAO : TypeArmeDAO) {
 
 
     /**
-     * Affiche la liste de toutes les types d'arme.
+     * Affiche la liste de tous les types d'arme.
      *
      * @param model Le modèle utilisé pour transmettre les données à la vue.
      * @return Le nom de la vue à afficher.
@@ -20,10 +20,10 @@ class TypeArmeControlleur(val typeArmeDAO : TypeArmeDAO) {
     @GetMapping("/admin/type-arme")
     fun index(model: Model): String {
 
-        // Récupère toutes les types d'arme depuis la base de données
+        // Récupère tous les types d'arme depuis la base de données
         val typeArme = this.typeArmeDAO.findAll()
 
-        // Ajoute la liste des types d'armes au modèle pour affichage dans la vue
+        // Ajoute la liste des types d'arme au modèle pour affichage dans la vue
         model.addAttribute("typeArme", typeArme)
 
         // Retourne le nom de la vue à afficher
@@ -74,11 +74,11 @@ class TypeArmeControlleur(val typeArmeDAO : TypeArmeDAO) {
 
 
     /**
-     * Gère la soumission du formulaire d'ajout de type d'arme.
+     * Gère la soumission du formulaire d'ajout du type d'arme.
      *
      * @param nouveauTypeArme L'objet typeArme créé à partir des données du formulaire.
      * @param redirectAttributes Les attributs de redirection pour transmettre des messages à la vue suivante.
-     * @return La redirection vers la page d'administration des types d'armes après l'ajout réussi.
+     * @return La redirection vers la page d'administration des types d'arme après l'ajout réussi.
      */
     @PostMapping("/admin/type-arme")
     fun store(@ModelAttribute nouvelleTypeArme: TypeArme, redirectAttributes: RedirectAttributes): String {
@@ -141,7 +141,7 @@ class TypeArmeControlleur(val typeArmeDAO : TypeArmeDAO) {
 
 
     /**
-     * Gère la suppression un typeArme par son identifiant.
+     * Gère la suppression d'un typeArme par son identifiant.
      *
      * @param id L'identifiant du typeArme à supprimer.
      * @param redirectAttributes Les attributs de redirection pour transmettre des messages à la vue suivante.
@@ -151,7 +151,7 @@ class TypeArmeControlleur(val typeArmeDAO : TypeArmeDAO) {
     @PostMapping("/admin/type-arme/delete")
     fun delete(@RequestParam id: Long, redirectAttributes: RedirectAttributes): String {
 
-        // Recherche de le typeArme à supprimer dans la base de données
+        // Recherche le typeArme à supprimer dans la base de données
         val typeArme: TypeArme = this.typeArmeDAO.findById(id).orElseThrow()
 
         // Suppression du typeArme de la base de données
@@ -160,7 +160,7 @@ class TypeArmeControlleur(val typeArmeDAO : TypeArmeDAO) {
         // Ajoute un message de succès pour être affiché à la vue suivante
         redirectAttributes.addFlashAttribute("msgSuccess", "Suppression de ${typeArme.nom} réussie")
 
-        // Redirige vers la page d'administration des typeArmes
+        // Redirige vers la page d'administration des types d'arme
         return "redirect:/admin/type-arme"
     }
 }

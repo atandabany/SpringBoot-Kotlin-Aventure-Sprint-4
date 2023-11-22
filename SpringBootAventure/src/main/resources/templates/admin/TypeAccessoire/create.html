@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Type Accessoire</title>
 </head>
 
 <body>
@@ -17,28 +17,24 @@
 
             <form th:action="@{/admin/type-accessoire}" th:object="${nouveauTypeAccessoire}"
                   method="post">
-
-                <h2 class="mb-4">Ajouter un type d'accessoire</h2>
+                <h2 class="mb-4">Ajouter un Type d'Accessoire</h2>
 
                 <!-- Input pour le nom de l'accessoire -->
                 <div class="mb-3">
-                    <label for="nom" class="form-label">Nom du type d'accessoire</label>
+                    <label for="nom" class="form-label">Nom du Type d'Accessoire</label>
                     <input required minlength="3" maxlength="255" type="text" class="form-control" id="nom" name="nom"
                            th:field="${nouveauTypeAccessoire.nom}">
                 </div>
 
-                <!-- Input pour le bonus d'accessoire' -->
+                <!-- Liste déroulante pour le bonus type accessoire -->
                 <div class="mb-3">
-                    <label for="bonusType" class="form-label">Bonus type d'accessoire</label>
-                    <select id="bonusType" name="bonusType"
+                    <label for="bonusType" class="form-label">Bonus Type</label>
+                    <select class="form-select" id="bonusType" name="bonusType"
                             th:field="${nouveauTypeAccessoire.bonusType}">
-                </div>
-
-                <div>
-                        <option value="attaque">Attaque</option>
-                        <option value="defense">Défense</option>
-                        <option value="endurance">Endurance</option>
-                        <option value="vitesse">Vitesse</option>
+                        <option value="Attaque">Attaque</option>
+                        <option value="Défense">Défense</option>
+                        <option value="Endurance">Endurance</option>
+                        <option value="Vitesse">Vitesse</option>
                     </select>
                 </div>
 
@@ -46,7 +42,6 @@
                 <button type="submit" class="btn btn-primary">Ajouter</button>
 
             </form>
-
 
     </main>
 

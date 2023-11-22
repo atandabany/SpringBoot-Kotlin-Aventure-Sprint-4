@@ -2,30 +2,39 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Types Accesoires</title>
+    <title>Types Accessoire</title>
 </head>
+
 <body>
+
 <div class="vh-100">
+
     <nav th:replace="mesFragments :: fragNav"></nav>
+
     <main class="container">
+
         <h1>Gestion des Types d'Accessoire</h1>
-        <div >
+
+        <div>
             <a th:href="@{'/admin/type-accessoire/create'}" class="btn btn-success">
                 Ajouter un Type d'Accessoire
             </a>
         </div>
+
         <table class="table table-striped">
+
             <thead>
             <tr>
                 <th>Nom</th>
                 <th>Bonus</th>
+                <th>Actions</th>
             </tr>
             </thead>
+
             <tbody>
             <tr th:each="unAccessoire : ${typeAccessoire}">
                 <td th:text="${unAccessoire.nom}"></td>
                 <td th:text="${unAccessoire.bonusType}"></td>
-
                 <td class="d-flex">
                     <a th:href="@{'/admin/type-accessoire/'+${unAccessoire.id}+'/edit'}" class="btn btn-warning">
                         Modifier
@@ -42,9 +51,14 @@
                 </td>
             </tr>
             </tbody>
+
         </table>
+
     </main>
 </div>
+
 <footer th:replace="mesFragments :: fragFooter"></footer>
+
 </body>
+
 </html>

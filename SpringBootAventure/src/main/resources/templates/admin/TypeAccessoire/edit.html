@@ -3,45 +3,61 @@
 <head>
     <head th:replace="mesFragments :: fragHead">
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>Edit Type Accessoire</title>
     </head>
+
 <body>
+
 <div class="vh-100">
 
     <nav th:replace="mesFragments :: fragNav"></nav>
-<main class="container">
-    <div class="row col-10 col-sm-8 col-md-6 col-lg-4 mx-auto mt-3">
 
-        <form novalidate class="validation"  th:action="@{/admin/type-accessoire/update}" th:object="${typeAccessoire}" method="post">
-            <h2 class="mb-4">Modification du type d'accessoire</h2>
-            <!-- Input pour l'id de le type accessoire -->
-            <input readonly required type="hidden" name="id" th:field="${typeAccessoire.id}">
+    <main class="container">
 
-            <!-- Input pour le nom du type accessoire -->
-            <div class="mb-3">
-                <label for="nom" class="form-label">Nom du type d'accessoire</label>
-                <input required minlength="3" maxlength="255" type="text" class="form-control" id="nom" name="nom"  th:field="${typeAccessoire.nom}">
-            </div>
+        <div class="row col-10 col-sm-8 col-md-6 col-lg-4 mx-auto mt-3">
 
-            <!-- Input pour le bonus type accessoire -->
-            <div class="mb-3">
-                <label for="bonusType" class="form-label">Bonus du bonus type</label>
-                <select id="bonusType" name="bonusType" th:field="${typeAccessoire.bonusType}">
-                    <option value="attaque">Attaque</option>
-                    <option value="defense">Defense</option>
-                    <option value="endurance">Endurance</option>
-                    <option value="vitesse">Vitesse</option>
-                </select>
-            </div>
+            <form novalidate class="validation" th:action="@{/admin/type-accessoire/update}"
+                  th:object="${typeAccessoire}" method="post">
 
-            <!-- Bouton de soumission -->
-            <button type="submit" class="btn btn-primary">Modifier</button>
-        </form>
-    </div>
-</main>
+                <h2 class="mb-4">Modification du Type d'Accessoire</h2>
 
-</body>
+                <!-- Input pour l'id de le type accessoire -->
+                <input readonly required type="hidden" name="id" th:field="${typeAccessoire.id}">
+
+                <!-- Input pour le nom du type accessoire -->
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom du Type d'Accessoire</label>
+                    <input required minlength="3" maxlength="255" type="text" class="form-control" id="nom" name="nom"
+                           th:field="${typeAccessoire.nom}">
+                </div>
+
+                <!-- Liste déroulante pour le bonus type accessoire -->
+
+                <div class="mb-3">
+                    <label for="bonusType" class="form-label">Bonus Type</label>
+                    <select class="form-select" id="bonusType" name="bonusType" th:field="${typeAccessoire.bonusType}">
+                        <option value="Attaque">Attaque</option>
+                        <option value="Défense">Défense</option>
+                        <option value="Endurance">Endurance</option>
+                        <option value="Vitesse">Vitesse</option>
+                    </select>
+                </div>
+
+                <!-- Bouton de soumission -->
+                <button type="submit" class="btn btn-primary">Modifier</button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
 <footer th:replace="mesFragments :: fragFooter"></footer>
 
 <script src="/js/validation.js"></script>
+
+</body>
+
 </html>

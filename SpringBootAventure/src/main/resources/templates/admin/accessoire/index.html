@@ -32,6 +32,7 @@
                 <th>Chemin Image</th>
                 <th>Qualité</th>
                 <th>Type Accessoire</th>
+                <th>Actions</th>
             </tr>
             </thead>
 
@@ -42,6 +43,7 @@
                 <td th:text="${unAccessoire.cheminImage}"></td>
                 <td th:text="${unAccessoire.qualite.nom}"></td>
                 <td th:text="${unAccessoire.typeAccessoire.nom}"></td>
+
                 <td class="d-flex">
                     <a th:href="@{'/admin/accessoire/'+${unAccessoire.id}+'/edit'}" class="btn btn-warning">
                         Modifier

@@ -56,7 +56,7 @@
                 <div class="mb-3">
                 <label for="type-arme" class="form-label">Type d'Arme</label>
                 <select class="form-select" id="type-arme" th:field="${arme.typeArme.id}">
-                    <option th:selected="${unetypeArme.id == arme.typeArme.id}" th:each="unetypeArme : ${typeArme}" th:value="${unetypeArme.id}" th:text="${unetypeArme.nom}"></option>
+                    <option th:selected="${uneTypeArme.id == arme.typeArme.id}" th:each="uneTypeArme : ${typeArme}" th:value="${uneTypeArme.id}" th:text="${uneTypeArme.nom}"></option>
                 </select>
                 </div>
 

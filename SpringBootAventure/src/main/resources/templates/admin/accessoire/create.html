@@ -2,7 +2,7 @@
 <html lang="fr">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Type Accessoire</title>
 </head>
 
 <body>
@@ -34,27 +34,32 @@
                            name="description" th:field="${nouvelleAccessoire.description}">
                 </div>
 
+                <!-- Input pour le chemin image -->
                 <div class="mb-3">
                     <label for="cheminImage" class="form-label">Chemin de l'Image</label>
                     <input type="text" class="form-control" id="cheminImage" name="nom"
                            th:field="${nouvelleAccessoire.cheminImage}">
                 </div>
 
+                <!-- Liste déroulante qualité -->
                 <div class="mb-3">
                     <label for="qualite" class="form-label">Qualité</label>
                     <select class="form-select" id="qualite" th:field="${nouvelleAccessoire.qualite.id}">
-                        <option th:each="uneQualite : ${qualites}" th:value="${uneQualite.id}" th:text="${uneQualite.nom}"></option>
+                        <option th:each="uneQualite : ${qualites}" th:value="${uneQualite.id}"
+                                th:text="${uneQualite.nom}"></option>
                     </select>
                 </div>
 
+                <!-- Liste déroulante type d'accessoire -->
                 <div class="mb-3">
                     <label for="typeAccessoire" class="form-label">Type Accessoire</label>
                     <select class="form-select" id="typeAccessoire" th:field="${nouvelleAccessoire.typeAccessoire.id}">
-                        <option th:each="unAccessoire : ${typeAccessoire}" th:value="${unAccessoire.id}" th:text="${unAccessoire.nom}"></option>
+                        <option th:each="unAccessoire : ${typeAccessoire}" th:value="${unAccessoire.id}"
+                                th:text="${unAccessoire.nom}"></option>
                     </select>
+                </div>
 
-
-                    <!-- Bouton de soumission -->
+                <!-- Bouton de soumission -->
                 <button type="submit" class="btn btn-primary">Ajouter</button>
 
             </form>

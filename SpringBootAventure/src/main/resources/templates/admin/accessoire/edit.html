@@ -2,7 +2,7 @@
 <html lang="en">
 <head th:replace="mesFragments :: fragHead">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Type Accessoire</title>
 </head>
 
 <body>
@@ -37,6 +37,7 @@
                            name="description" th:field="${accessoire.description}">
                 </div>
 
+                <!-- Liste déroulante qualité -->
                 <div class="mb-3">
                     <label for="qualite" class="form-label">Qualité</label>
                     <select class="form-select" id="qualite" th:field="${accessoire.qualite.id}">
@@ -44,6 +45,7 @@
                     </select>
                 </div>
 
+                <!-- Liste déroulante type d'accessoire -->
                 <div class="mb-3">
                     <label for="typeAccessoire" class="form-label">Type Accessoire</label>
                     <select class="form-select" id="typeAccessoire" th:field="${accessoire.typeAccessoire.id}">
