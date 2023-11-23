@@ -1,7 +1,7 @@
 package org.ldv.springbootaventure.model.dao
 
-import org.ldv.springbootaventure.model.entity.Qualite
+import org.ldv.springbootaventure.model.entity.Combat
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface QualiteDAO : JpaRepository<Qualite,Long> {
+interface CombatDAO : JpaRepository<Combat, Long> {
 }

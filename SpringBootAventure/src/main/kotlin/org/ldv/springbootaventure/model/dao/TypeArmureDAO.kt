@@ -5,5 +5,4 @@ import org.ldv.springbootaventure.model.entity.TypeArmure
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface TypeArmureDAO : JpaRepository<TypeArmure, Long> {
-
 }

@@ -23,4 +23,23 @@ class Armure constructor(
      var typeArmure: TypeArmure? = null
 
 ):Item(id, nom, description, cheminImage){
+
+    /**@author Adrien
+     * @return type + rareté
+     * Méthode "calculProtection" pour calculer la protection de l'armure
+     */
+    fun calculProtection(): Int {
+        var additionProtection = this.typeArmure!!.bonusType + this.qualite!!.bonusQualite
+        return additionProtection
+    }
+
+
+    /**
+     * Équipe l'arme sur un personnage, permettant au personnage de l'utiliser pour attaquer.
+     *
+     * @param cible Le personnage sur lequel l'arme est équipée.
+     */
+    override fun utiliser(cible: Personnage):String {
+        return cible.equipe(this)
+    }
 }

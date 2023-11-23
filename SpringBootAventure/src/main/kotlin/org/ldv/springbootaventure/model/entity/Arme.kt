@@ -24,12 +24,33 @@ class Arme constructor(
 
     @ManyToOne
     @JoinColumn(name = "typeArme_id")
-    var typeArme : TypeArme? = null
+    var typeArme: TypeArme? = null
 
-) : Item(id, nom, description, cheminImage)
+) : Item(id, nom, description, cheminImage) {
+
+    /**
+     * @author Steeven
+     * @param
+     * @return resultat + qualite (bonus rareté)
+     * Méthode pour calculer les dégats de l'arme en fonction du dès lancer.
+     */
+    fun calculerDegats(): Int {
+        var resultat = TirageDes(this.typeArme!!.nombreDes, this.typeArme!!.valeurDeMax).lance()
+        val desCritique = TirageDes(1, 20).lance()
+
+        if (desCritique >= this.typeArme!!.activationCritique) {
+            resultat = typeArme!!.activationCritique * this.typeArme!!.multiplicateurCritique
+        }
+        return resultat + this.qualite!!.bonusQualite
+    }
 
 
-
-{
-
+    /**
+     * Équipe l'arme sur un personnage, permettant au personnage de l'utiliser pour attaquer.
+     *
+     * @param cible Le personnage sur lequel l'arme est équipée.
+     */
+    override fun utiliser(cible: Personnage):String {
+        return cible.equipe(this)
+    }
 }

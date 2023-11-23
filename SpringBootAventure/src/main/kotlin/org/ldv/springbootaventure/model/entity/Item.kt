@@ -30,5 +30,10 @@ open abstract class Item constructor(
     var cheminImage: String?
 ) {
 // TODO sprint 5: methode utiliser
-
+    /**
+     * Méthode abstraite permettant d'utiliser l'objet sur une cible (personnage).
+     *
+     * @param cible Le personnage sur lequel l'objet est utilisé.
+     */
+    abstract fun utiliser(cible: Personnage):String
 }
