@@ -27,7 +27,11 @@ open abstract class Item constructor(
     var description: String,
 
 //Chemin vers l'image de l'item
-    var cheminImage: String?
+    var cheminImage: String?,
+
+    @ManyToOne
+    @JoinColumn (name = "item_id")
+    var items: LigneInventaire? = null
 ) {
 // TODO sprint 5: methode utiliser
     /**

@@ -21,19 +21,26 @@ class Personnage constructor(
     var vitesse: Int,
     var cheminImage: String,
 
+
+
     @OneToMany(mappedBy = "personnage")
     val ligneInventaire: MutableList<LigneInventaire> = mutableListOf(),
 
 
     @ManyToOne
-    val accesoireEquipe: Accessoire? = null,
+    var accesoireEquipe: Accessoire? = null,
 
     @ManyToOne
     var armeEquipe: Arme? = null,
 
     @ManyToOne
-    var armureEquipe: Armure? = null
+    var armureEquipe: Armure? = null,
 
+    @OneToMany
+    var compagne: MutableList<Campagne> = mutableListOf(),
+
+    @OneToMany
+    var combat: MutableList<Combat> = mutableListOf(),
 
 ) {
     val pointDeVieMax: Int
@@ -140,6 +147,89 @@ class Personnage constructor(
         // Retourner le message global décrivant l'action de loot
         return msg
     }
+
+    fun equipe(uneArme: Arme): String {
+//        val listItem:MutableList<Item> = mutableListOf()
+//        for (ligneItem in this.ligneInventaire){
+//            listItem.add(ligneItem.item!!)
+//      }
+
+
+//      val listeItem: List<Item?> =ligneInventaire.map { ligneInventaire -> ligneInventaire.item }
+//        if (uneArme in listeItem) {
+//            armeEquipe = uneArme
+//            println("$nom équipe « ${uneArme.nom} ».")
+//        }
+
+        if (ligneInventaire.any { ligneInventaire -> ligneInventaire.item == uneArme }) {
+            armeEquipe = uneArme
+            //println("$nom équipe « ${uneArme.nom} ».")
+        }
+        return "${nom} équipe << ${uneArme.nom} >>."
+    }
+
+
+    fun equipe(uneArmure: Armure): String {
+        val listItem:MutableList<Item> = mutableListOf()
+        for (ligneItem in this.ligneInventaire){
+            listItem.add(ligneItem.item!!)
+        }
+        if (uneArmure in listItem){
+            armureEquipe = uneArmure
+        }
+        return "${nom} équipe << ${uneArmure.nom} >>."
+
+    }
+
+    
+   // Parcourir la liste de l'inventaire item et équipe un accessoire si un accessoire est dans l'inventaire
+    fun equipe(unAccessoire: Accessoire) : String {
+        if (ligneInventaire.any { ligneInventaire -> ligneInventaire.item == unAccessoire }) {
+            accesoireEquipe = unAccessoire
+        }
+        return "${nom} équipe << ${unAccessoire.nom} >>"
+    }
+
+    /**
+     * Vérification si le personnage a une potion dans son inventaire.
+     *
+     * @return true si le personnage a une potion, false sinon.
+     */
+    fun aUnePotion(): Boolean {
+        // Utiliser la méthode any pour vérifier si une ligne d'inventaire contient une Potion
+        return this.ligneInventaire.any { ligneInventaire -> ligneInventaire.item is Potion }
+    }
+
+    /**
+     * Méthode pour boire une potion de l'inventaire du personnage.
+     *
+     * @param consomer Spécifie si la potion doit être consommée (décrémentant la quantité) ou non.
+     *                 Par défaut, la potion est consommée.
+     * @return Un message décrivant l'action effectuée, tel que boire la potion ou l'absence de potion.
+     */
+    fun boirePotion(consomer: Boolean = true): String {
+        // Message par défaut si le personnage n'a pas de potion dans son inventaire
+        var msg = "$nom n'a pas de potion dans son inventaire."
+
+        // Vérifier si le personnage a une potion dans son inventaire
+        if (this.aUnePotion()) {
+            // Filtrer les lignes d'inventaire pour obtenir celles qui contiennent des potions
+            val lignePotions: List<LigneInventaire> =
+                this.ligneInventaire.filter { ligneInventaire -> ligneInventaire.item is Potion }
+
+            // Utiliser la première potion dans la liste et obtenir le message résultant de l'utilisation
+            msg = lignePotions[0].item!!.utiliser(this)
+
+            // Si consomer est false, augmenter la quantité de potions dans l'inventaire
+            if (!consomer) {
+                lignePotions[0].quantite += 1
+            }
+        }
+
+        // Retourner le message décrivant l'action effectuée
+        return msg
+    }
+
 }
 
 
