@@ -18,10 +18,9 @@ class Utilisateur constructor(
     var roles: List<Role>? = null,
 
     //Association entre org.ldv.springbootaventure.model.entity.Utilisateur et Campagne
-    //Un utilisateur peut avoir plusieurs campagne
-    @OneToMany
-    @JoinColumn(name = "campagne_id")
-    var campagne : MutableList<Campagne> = mutableListOf(),
+    //Un utilisateur peut avoir plusieurs campagnes
+    @OneToMany(mappedBy = "auteur")
+    var campagnes : MutableList<Campagne> = mutableListOf(),
 ){
 
 }

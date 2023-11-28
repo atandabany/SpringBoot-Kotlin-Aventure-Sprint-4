@@ -4,6 +4,7 @@ import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 
 @Entity
 @DiscriminatorValue("accessoire")
@@ -24,7 +25,13 @@ class Accessoire constructor(
     //Plusieurs armes peuvent être rataché a un accessoire
     @ManyToOne
     @JoinColumn(name = "type_Accessoire_id")
-    var typeAccessoire: TypeAccessoire? = null
+    var typeAccessoire: TypeAccessoire? = null,
+
+
+    @OneToMany(mappedBy = "accesoireEquipe")
+    val personnages: MutableList<Personnage> = mutableListOf()
+
+
 ):Item(id, nom, description, cheminImage
 ){
 

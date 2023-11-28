@@ -20,7 +20,12 @@ class Armure constructor(
     // Plusieurs armures peuvent être rataché a un type d'armure
     @ManyToOne
     @JoinColumn(name = "type_armure_id")
-     var typeArmure: TypeArmure? = null
+    var typeArmure: TypeArmure? = null,
+
+    @OneToMany(mappedBy = "armureEquipe")
+    var personnages : MutableList<Personnage> = mutableListOf()
+
+
 
 ):Item(id, nom, description, cheminImage){
 

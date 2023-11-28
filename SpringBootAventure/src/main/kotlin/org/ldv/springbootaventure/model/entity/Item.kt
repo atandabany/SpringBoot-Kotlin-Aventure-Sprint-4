@@ -29,9 +29,8 @@ open abstract class Item constructor(
 //Chemin vers l'image de l'item
     var cheminImage: String?,
 
-    @ManyToOne
-    @JoinColumn (name = "item_id")
-    var items: LigneInventaire? = null
+    @OneToMany (mappedBy = "item")
+    var inventaire: MutableList<LigneInventaire> = mutableListOf()
 ) {
 // TODO sprint 5: methode utiliser
     /**

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 
@@ -22,25 +23,30 @@ class Personnage constructor(
     var cheminImage: String,
 
 
-
     @OneToMany(mappedBy = "personnage")
     val ligneInventaire: MutableList<LigneInventaire> = mutableListOf(),
 
-
     @ManyToOne
+    @JoinColumn(name = "accesoire_id")
     var accesoireEquipe: Accessoire? = null,
 
     @ManyToOne
+    @JoinColumn(name = "arme_id")
     var armeEquipe: Arme? = null,
 
     @ManyToOne
+    @JoinColumn(name = "armure_id")
     var armureEquipe: Armure? = null,
 
-    @OneToMany
-    var compagne: MutableList<Campagne> = mutableListOf(),
+    @OneToMany(mappedBy = "hero")
+    var compagnes: MutableList<Campagne> = mutableListOf(),
 
-    @OneToMany
-    var combat: MutableList<Combat> = mutableListOf(),
+    @OneToMany(mappedBy = "monstre")
+    var combats: MutableList<Combat> = mutableListOf(),
+
+
+
+
 
 ) {
     val pointDeVieMax: Int
@@ -148,6 +154,12 @@ class Personnage constructor(
         return msg
     }
 
+    /**
+     * Parcourir la liste de l'inventaire item et équipe une arme, si une arme est dans l'inventaire
+     *
+     * @param uneArme sera attribué au personnage
+     * @return $nom et nom de l'arme si l'arme est équipé
+     */
     fun equipe(uneArme: Arme): String {
 //        val listItem:MutableList<Item> = mutableListOf()
 //        for (ligneItem in this.ligneInventaire){
@@ -169,6 +181,12 @@ class Personnage constructor(
     }
 
 
+    /**
+     * Parcours la liste de l'inventaire item et équipe une armure uniqument si l'armure est présente dans l'inventaire
+     *
+     * @param uneArmure L'armure qui sera attribuée au personnage.
+     * @return Un message décrivant l'armure équpée.
+     */
     fun equipe(uneArmure: Armure): String {
         val listItem:MutableList<Item> = mutableListOf()
         for (ligneItem in this.ligneInventaire){
@@ -181,8 +199,13 @@ class Personnage constructor(
 
     }
 
-    
-   // Parcourir la liste de l'inventaire item et équipe un accessoire si un accessoire est dans l'inventaire
+
+    /**
+     * Parcourir la liste de l'inventaire item et équipe un accessoire si un accessoire est dans l'inventaire
+     *
+     * @param unAccessoire qui sera attribué au personnage
+     * @return $nom et nom de l'accessoire si l'accessoire est équipé
+     */
     fun equipe(unAccessoire: Accessoire) : String {
         if (ligneInventaire.any { ligneInventaire -> ligneInventaire.item == unAccessoire }) {
             accesoireEquipe = unAccessoire
@@ -199,6 +222,7 @@ class Personnage constructor(
         // Utiliser la méthode any pour vérifier si une ligne d'inventaire contient une Potion
         return this.ligneInventaire.any { ligneInventaire -> ligneInventaire.item is Potion }
     }
+
 
     /**
      * Méthode pour boire une potion de l'inventaire du personnage.

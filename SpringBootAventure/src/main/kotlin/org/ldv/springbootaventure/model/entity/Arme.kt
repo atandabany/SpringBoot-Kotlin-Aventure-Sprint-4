@@ -5,6 +5,7 @@ import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 import org.ldv.springbootaventure.model.entity.Item
 import org.ldv.springbootaventure.model.entity.Qualite
 
@@ -24,7 +25,11 @@ class Arme constructor(
 
     @ManyToOne
     @JoinColumn(name = "typeArme_id")
-    var typeArme: TypeArme? = null
+    var typeArme: TypeArme? = null,
+
+    @OneToMany(mappedBy = "armeEquipe")
+    var personnages: MutableList<Personnage> = mutableListOf()
+
 
 ) : Item(id, nom, description, cheminImage) {
 
