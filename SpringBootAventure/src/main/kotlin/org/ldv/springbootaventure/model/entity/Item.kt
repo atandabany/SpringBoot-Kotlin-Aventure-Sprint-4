@@ -29,6 +29,8 @@ open abstract class Item constructor(
 //Chemin vers l'image de l'item
     var cheminImage: String?,
 
+    // Association One-to-Many entre l'entité Item et LigneInventaire
+    // Un item peut être présent dans plusieurs lignes d'inventaire (One Item vers Many LigneInventaire)
     @OneToMany (mappedBy = "item")
     var inventaire: MutableList<LigneInventaire> = mutableListOf()
 ) {

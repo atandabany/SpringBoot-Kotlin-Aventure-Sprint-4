@@ -17,16 +17,20 @@ class Arme constructor(
     description: String,
     cheminImage: String?,
 
-    //Association entre org.ldv.springbootaventure.model.entity.Arme et arme
-    //Plusieurs armes peuvent être rataché à une arme
+    // Association entre Arme et Qualite
+    // Plusieurs armes peuvent être rattachées à une qualité
     @ManyToOne
     @JoinColumn(name = "qualite_id")
     var qualite: Qualite? = null,
 
+    // association entre Arme et type Arme
+    // Plusieurs armes peuvent partager le même type d'arme.
     @ManyToOne
     @JoinColumn(name = "typeArme_id")
     var typeArme: TypeArme? = null,
 
+    // Association entre Arme et Personnage
+    // Une arme peut être équipée par plusieurs personnages
     @OneToMany(mappedBy = "armeEquipe")
     var personnages: MutableList<Personnage> = mutableListOf()
 

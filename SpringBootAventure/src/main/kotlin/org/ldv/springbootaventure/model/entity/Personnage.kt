@@ -22,25 +22,36 @@ class Personnage constructor(
     var vitesse: Int,
     var cheminImage: String,
 
-
+    // Association One-to-Many entre Personnage et LigneInventaire
+    // Un personnage peut posséder plusieurs lignes d'inventaire
     @OneToMany(mappedBy = "personnage")
     val ligneInventaire: MutableList<LigneInventaire> = mutableListOf(),
 
+    // Association Many-to-One entre l'entité Personnage et Accessoire
+    // Un personnage peut être équipé d'un unique accessoire
     @ManyToOne
     @JoinColumn(name = "accesoire_id")
     var accesoireEquipe: Accessoire? = null,
 
+    // Association Many-to-One entre l'entité Personnage et Arme
+    // Un personnage peut être équipé d'une unique arme
     @ManyToOne
     @JoinColumn(name = "arme_id")
     var armeEquipe: Arme? = null,
 
+    // Association Many-to-One entre l'entité Personnage et Armure
+    // Un personnage peut être équipé d'une unique armure
     @ManyToOne
     @JoinColumn(name = "armure_id")
     var armureEquipe: Armure? = null,
 
+    // Association One-to-Many entre l'entité Personnage et Campagne
+    // Un personnage peut participer à plusieurs campagnes
     @OneToMany(mappedBy = "hero")
     var compagnes: MutableList<Campagne> = mutableListOf(),
 
+    // Association One-to-Many entre l'entité Personnage et Combat
+    // Un personnage peut être impliqué dans plusieurs combats
     @OneToMany(mappedBy = "monstre")
     var combats: MutableList<Combat> = mutableListOf(),
 
