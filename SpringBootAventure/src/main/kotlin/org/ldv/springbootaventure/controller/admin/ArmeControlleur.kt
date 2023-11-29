@@ -68,7 +68,6 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
         val nouvelleArme = Arme(0,"" , "" , "")
         val qualites = qualiteDAO.findAll()
         val typeArme = typeArmeDAO.findAll()
-
         // Ajoute la nouvelle arme, la qualité et le type d'arme au modèle pour affichage dans le formulaire de création
         model.addAttribute("nouvelleArme",nouvelleArme)
         model.addAttribute("qualites",qualites)
@@ -107,6 +106,7 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
         val uneArme = this.armeDao.findById(id).orElseThrow()
         val qualites = qualiteDAO.findAll()
         val typeArme = typeArmeDAO.findAll()
+
 
         // Ajoute l'arme au modèle pour affichage dans la vue
         model.addAttribute("arme", uneArme)

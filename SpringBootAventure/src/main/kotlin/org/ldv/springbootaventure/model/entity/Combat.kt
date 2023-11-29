@@ -10,7 +10,7 @@ class Combat constructor(
     @Column(name = "id", nullable = false)
     var id: Long?,
     var nombreTours: Int,
-
+    var estTermine : String,
 
     // Association entre org.ldv.springbootaventure.model.entity.Combat et Campagne
     // Plusieurs combats peuvent être ratachés à une campagne
@@ -22,7 +22,7 @@ class Combat constructor(
     // Association entre org.ldv.springbootaventure.model.entity.Combat et Campagne
     // Plusieurs combats peuvent être ratachés à un personnage
     @ManyToOne
-    @JoinColumn(name = "personnage_id")
+    @JoinColumn(name = "monstre_id")
     var monstre: Personnage? = null
 ){
 

@@ -55,7 +55,9 @@ class Personnage constructor(
     @OneToMany(mappedBy = "monstre")
     var combats: MutableList<Combat> = mutableListOf(),
 
-
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_id")
+    var utilisateur: Utilisateur?= null
 
 
 

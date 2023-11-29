@@ -1,6 +1,8 @@
 package org.ldv.springbootaventure.model.dao
 import org.ldv.springbootaventure.model.entity.Personnage
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 
-class PersonnageDAO(personnageDAO : JpaRepository<Personnage, Long>) {
+@Repository
+interface PersonnageDAO : JpaRepository<Personnage, Long> {
 }

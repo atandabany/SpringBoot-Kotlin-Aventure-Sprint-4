@@ -1,3 +1,4 @@
+package org.ldv.springbootaventure.service
 import org.ldv.springbootaventure.model.dao.UtilisateurDAO
 import org.ldv.springbootaventure.model.entity.Utilisateur
 import org.springframework.security.core.GrantedAuthority

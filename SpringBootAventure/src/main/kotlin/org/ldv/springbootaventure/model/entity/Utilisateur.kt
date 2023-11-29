@@ -21,6 +21,9 @@ class Utilisateur constructor(
     //Un utilisateur peut avoir plusieurs campagnes
     @OneToMany(mappedBy = "auteur")
     var campagnes : MutableList<Campagne> = mutableListOf(),
+
+    @OneToMany(mappedBy = "utilisateur")
+    var personnage: MutableList<Personnage> = mutableListOf()
 ){
 
 }
