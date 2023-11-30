@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 class CampagneControlleur(val campagneDao: CampagneDAO, val personnageDAO: PersonnageDAO) {
 
-    @GetMapping("/jouer/campagne")
+    @GetMapping("/joueur/campagne")
     fun index(
         model: Model,
         @RequestParam(required = false) search: String?,
@@ -32,6 +32,6 @@ class CampagneControlleur(val campagneDao: CampagneDAO, val personnageDAO: Perso
         model.addAttribute("campagnes", lesCampagnes)
         // Ajouter le terme de recherche au modèle pour pré-remplir le champ de recherche dans la vue
         model.addAttribute("search", search)
-        return "jouer/campagne/index"
+        return "joueur/campagne/index"
     }
 }

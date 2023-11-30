@@ -23,6 +23,44 @@
             </a>
         </div>
 
+        <!-- Gestion du cas où aucune armure n'est trouvée -->
+        <div th:if="${armures.content.size()==0}">
+            <p>Aucune armure trouvée.</p>
+        </div>
+
+        <!-- Affichage des armures -->
+        <div class="row my-2">
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <!-- Liens de pagination -->
+                    <li class="page-item" th:if="${armures.hasPrevious()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/armure'}(page=0, size=${armures.size}, sort=${armures.sort})}">Première</a>
+                    </li>
+                    <li class="page-item" th:if="${armures.hasPrevious()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/armure'}(page=${armures.number - 1}, size=${armures.size}, sort=${armures.sort})}">Précédente</a>
+                    </li>
+                    <li class="page-item" th:each="page : ${#numbers.sequence(0, armures.totalPages - 1)}"
+                        th:class="${armures.number == page} ? 'active' : ''">
+                        <a class="page-link"
+                           th:href="@{${'/admin/armure'}(page=${page}, size=${armures.size}, sort=${armures.sort})}"
+                           th:text="${page + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:if="${armures.hasNext()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/armure'}(page=${armures.number + 1}, size=${armures.size}, sort=${armures.sort})}">Suivante</a>
+                    </li>
+                    <li class="page-item" th:if="${armures.hasNext()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/armure'}(page=${armures.totalPages - 1}, size=${armures.size}, sort=${armures.sort})}">Dernière</a>
+                    </li>
+                    <!-- ... -->
+                </ul>
+            </nav>
+        </div>
+
         <table class="table table-striped">
 
             <thead>

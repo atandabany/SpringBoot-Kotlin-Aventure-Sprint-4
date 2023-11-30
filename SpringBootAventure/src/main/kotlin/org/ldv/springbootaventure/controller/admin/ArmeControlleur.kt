@@ -1,9 +1,10 @@
 package org.ldv.springbootaventure.controller.admin
-
+import org.springframework.data.domain.Pageable
 import org.ldv.springbootaventure.model.dao.ArmeDAO
 import org.ldv.springbootaventure.model.dao.QualiteDAO
 import org.ldv.springbootaventure.model.dao.TypeArmeDAO
 import org.ldv.springbootaventure.model.entity.Arme
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -13,24 +14,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO, private val typeArmeDAO: TypeArmeDAO){
 
 
-    /**
-     * Affiche la liste de toutes les armes
-     *
-     * @param model Le modèle utilisé pour transmettre les données à la vue.
-     * @return Le nom de la vue à afficher.
-     */
-    @GetMapping("/admin/arme")
-    fun index(model: Model): String {
-
-        // Récupère toutes les armes depuis la base de données
-        val arme = this.armeDao.findAll()
-
-        // Ajoute la liste des armes au modèle pour affichage dans la vue
-        model.addAttribute("arme", arme)
-
-        // Retourne le nom de la vue à afficher
-        return "admin/arme/index"
-    }
+//    /**
+//     * Affiche la liste de toutes les armes
+//     *
+//     * @param model Le modèle utilisé pour transmettre les données à la vue.
+//     * @return Le nom de la vue à afficher.
+//     */
+//    @GetMapping("/admin/arme")
+//    fun index(model: Model): String {
+//
+//        // Récupère toutes les armes depuis la base de données
+//        val arme = this.armeDao.findAll()
+//
+//        // Ajoute la liste des armes au modèle pour affichage dans la vue
+//        model.addAttribute("arme", arme)
+//
+//        // Retourne le nom de la vue à afficher
+//        return "admin/arme/index"
+//    }
 
 
     /**
@@ -180,5 +181,27 @@ class ArmeControlleur (val armeDao : ArmeDAO, private val qualiteDAO: QualiteDAO
 
         // Redirige vers la page d'administration des armes
         return "redirect:/admin/arme"
+    }
+
+    @GetMapping("/admin/arme")
+    fun index(
+        model: Model,
+        @RequestParam(required = false) search: String?,
+        pageable: Pageable
+    ): String {
+
+        // Récupérer l'objet Principal
+        val authentication: org.springframework.security.core.Authentication = SecurityContextHolder.getContext().authentication
+        // Récupérer le nom d'utilisateur à partir de l'objet Principal
+        val email: String = authentication.getName()
+
+        // Utiliser la méthode du DAO pour récupérer les armes par utilisateur avec pagination et recherche
+        val nomRechercher= if(search.isNullOrBlank()){""}else{search}
+        val lesArmes = armeDao.findByNomContainsIgnoreCase(nomRechercher, pageable)
+
+        model.addAttribute("armes", lesArmes)
+        // Ajouter le terme de recherche au modèle pour pré-remplir le champ de recherche dans la vue
+        model.addAttribute("search", search)
+        return "admin/arme/index"
     }
 }

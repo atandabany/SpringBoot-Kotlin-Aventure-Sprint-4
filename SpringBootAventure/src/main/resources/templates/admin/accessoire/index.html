@@ -22,6 +22,43 @@
                 Ajouter un Accessoire
             </a>
         </div>
+        <!-- Gestion du cas où aucun accessoires n'est trouvé -->
+        <div th:if="${accessoires.content.size()==0}">
+            <p>Aucun accessoire trouvé.</p>
+        </div>
+
+        <!-- Affichage des accessoires -->
+        <div class="row my-2">
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <!-- Liens de pagination -->
+                    <li class="page-item" th:if="${accessoires.hasPrevious()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/accessoire'}(page=0, size=${accessoires.size}, sort=${accessoires.sort})}">Première</a>
+                    </li>
+                    <li class="page-item" th:if="${accessoires.hasPrevious()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/accessoire'}(page=${accessoires.number - 1}, size=${accessoires.size}, sort=${accessoires.sort})}">Précédente</a>
+                    </li>
+                    <li class="page-item" th:each="page : ${#numbers.sequence(0, accessoires.totalPages - 1)}"
+                        th:class="${accessoires.number == page} ? 'active' : ''">
+                        <a class="page-link"
+                           th:href="@{${'/admin/accessoire'}(page=${page}, size=${accessoires.size}, sort=${accessoires.sort})}"
+                           th:text="${page + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:if="${accessoires.hasNext()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/accessoire'}(page=${accessoires.number + 1}, size=${accessoires.size}, sort=${accessoires.sort})}">Suivante</a>
+                    </li>
+                    <li class="page-item" th:if="${accessoires.hasNext()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/accessoire'}(page=${accessoires.totalPages - 1}, size=${accessoires.size}, sort=${accessoires.sort})}">Dernière</a>
+                    </li>
+                    <!-- ... -->
+                </ul>
+            </nav>
+        </div>
 
         <table class="table table-striped">
 

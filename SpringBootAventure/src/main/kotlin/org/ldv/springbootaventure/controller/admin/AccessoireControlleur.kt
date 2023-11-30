@@ -4,6 +4,8 @@ import org.ldv.springbootaventure.model.dao.AccessoireDAO
 import org.ldv.springbootaventure.model.dao.QualiteDAO
 import org.ldv.springbootaventure.model.dao.TypeAccessoireDAO
 import org.ldv.springbootaventure.model.entity.Accessoire
+import org.springframework.data.domain.Pageable
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -13,23 +15,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 class AccessoireControlleur(val accessoireDAO : AccessoireDAO, val qualiteDAO: QualiteDAO, val typeAccessoireDAO: TypeAccessoireDAO) {
 
 
-    /**
-     * Affiche la liste de toutes les accessoires
-     * @param model Le modèle utilisé pour transmettre les données à la vue.
-     * @return Le nom de la vue à afficher.
-     */
-    @GetMapping("/admin/accessoire")
-    fun index(model: Model): String {
-
-        // Récupère toutes les accessoires depuis la base de données
-        val accessoire = this.accessoireDAO.findAll()
-
-        // Ajoute la liste des accessoires au modèle pour affichage dans la vue
-        model.addAttribute("accessoire", accessoire)
-
-        // Retourne le nom de la vue à afficher
-        return "admin/accessoire/index"
-    }
+//    /**
+//     * Affiche la liste de toutes les accessoires
+//     * @param model Le modèle utilisé pour transmettre les données à la vue.
+//     * @return Le nom de la vue à afficher.
+//     */
+//    @GetMapping("/admin/accessoire")
+//    fun index(model: Model): String {
+//
+//        // Récupère toutes les accessoires depuis la base de données
+//        val accessoire = this.accessoireDAO.findAll()
+//
+//        // Ajoute la liste des accessoires au modèle pour affichage dans la vue
+//        model.addAttribute("accessoire", accessoire)
+//
+//        // Retourne le nom de la vue à afficher
+//        return "admin/accessoire/index"
+//    }
 
 
     /**
@@ -163,7 +165,7 @@ class AccessoireControlleur(val accessoireDAO : AccessoireDAO, val qualiteDAO: Q
      * @param id L'identifiant de l'accessoire à supprimer.
      * @param redirectAttributes Les attributs de redirection pour transmettre des messages à la vue suivante.
      * @return La redirection vers la page d'administration des accessoires après la suppression réussie.
-     * @throws NoSuchElementException si l'armure avec l'ID spécifié n'est pas trouvée dans la base de données.
+     * @throws NoSuchElementException si l'accessoire avec l'ID spécifié n'est pas trouvée dans la base de données.
      */
     @PostMapping("/admin/accessoire/delete")
     fun delete(@RequestParam id: Long, redirectAttributes: RedirectAttributes): String {
@@ -179,5 +181,28 @@ class AccessoireControlleur(val accessoireDAO : AccessoireDAO, val qualiteDAO: Q
 
         // Redirige vers la page d'administration des accessoires
         return "redirect:/admin/accessoire"
+    }
+
+
+    @GetMapping("/admin/accessoire")
+    fun index(
+        model: Model,
+        @RequestParam(required = false) search: String?,
+        pageable: Pageable
+    ): String {
+
+        // Récupérer l'objet Principal
+        val authentication: org.springframework.security.core.Authentication = SecurityContextHolder.getContext().authentication
+        // Récupérer le nom d'utilisateur à partir de l'objet Principal
+        val email: String = authentication.getName()
+
+        // Utiliser la méthode du DAO pour récupérer les accessoires par utilisateur avec pagination et recherche
+        val nomRechercher= if(search.isNullOrBlank()){""}else{search}
+        val lesAccessoires = accessoireDAO.findByNomContains(nomRechercher,pageable)
+
+        model.addAttribute("accessoires", lesAccessoires)
+        // Ajouter le terme de recherche au modèle pour pré-remplir le champ de recherche dans la vue
+        model.addAttribute("search", search)
+        return "admin/accessoire/index"
     }
 }

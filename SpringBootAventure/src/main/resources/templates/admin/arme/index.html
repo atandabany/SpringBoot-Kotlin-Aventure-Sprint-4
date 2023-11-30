@@ -23,6 +23,44 @@
             </a>
         </div>
 
+        <!-- Gestion du cas où aucune armes n'est trouvée -->
+        <div th:if="${armes.content.size()==0}">
+            <p>Aucune atrmes trouvée.</p>
+        </div>
+
+        <!-- Affichage des armes -->
+        <div class="row my-2">
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <!-- Liens de pagination -->
+                    <li class="page-item" th:if="${armes.hasPrevious()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/arme'}(page=0, size=${armes.size}, sort=${armes.sort})}">Première</a>
+                    </li>
+                    <li class="page-item" th:if="${armes.hasPrevious()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/arme'}(page=${armes.number - 1}, size=${armes.size}, sort=${armes.sort})}">Précédente</a>
+                    </li>
+                    <li class="page-item" th:each="page : ${#numbers.sequence(0, armes.totalPages - 1)}"
+                        th:class="${armes.number == page} ? 'active' : ''">
+                        <a class="page-link"
+                           th:href="@{${'/admin/arme'}(page=${page}, size=${armes.size}, sort=${armes.sort})}"
+                           th:text="${page + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:if="${armes.hasNext()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/arme'}(page=${armes.number + 1}, size=${armes.size}, sort=${armes.sort})}">Suivante</a>
+                    </li>
+                    <li class="page-item" th:if="${armes.hasNext()}">
+                        <a class="page-link"
+                           th:href="@{${'/admin/arme'}(page=${armes.totalPages - 1}, size=${armes.size}, sort=${armes.sort})}">Dernière</a>
+                    </li>
+                    <!-- ... -->
+                </ul>
+            </nav>
+        </div>
+
         <table class="table table-striped">
 
             <thead>
@@ -37,7 +75,7 @@
             </thead>
 
             <tbody>
-            <tr th:each="uneArme : ${arme}">
+            <tr th:each="uneArme : ${armes}">
                 <td th:text="${uneArme.nom}"></td>
                 <td th:text="${uneArme.description}"></td>
                 <td th:text="${uneArme.cheminImage}"></td>
